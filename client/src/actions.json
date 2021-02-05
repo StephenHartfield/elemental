@@ -1,0 +1,294 @@
+[
+    {
+        "displayName": "Sight",
+        "displaySubtitle": "Reveal",
+        "displayText": "Reveal first row",
+        "value": "sight",
+        "type": "action",
+        "subType": "reveal",
+        "victoryPoints": 0,
+        "number": 0
+    },
+    {
+        "displayName": "Foresight",
+        "displaySubtitle": "Reveal",
+        "displayText": "Reveal second row",
+        "value": "foresight",
+        "type": "action",
+        "subType": "reveal",
+        "victoryPoints": 0,
+        "number": 1
+    },
+    {
+        "displayName": "Sight",
+        "displaySubtitle": "Reveal",
+        "displayText": "Reveal first row",
+        "value": "sight",
+        "type": "action",
+        "subType": "reveal",
+        "victoryPoints": 0,
+        "number": 2
+    },
+    {
+        "displayName": "Foresight",
+        "displaySubtitle": "Reveal",
+        "displayText": "Reveal second row",
+        "value": "foresight",
+        "type": "action",
+        "subType": "reveal",
+        "victoryPoints": 0,
+        "number": 3
+    },
+    {
+        "displayName": "Sight",
+        "displaySubtitle": "Reveal",
+        "displayText": "Reveal first row",
+        "value": "sight",
+        "type": "action",
+        "subType": "reveal",
+        "victoryPoints": 0,
+        "number": 4
+    },
+    {
+        "displayName": "Foresight",
+        "displaySubtitle": "Reveal",
+        "displayText": "Reveal second row",
+        "value": "foresight",
+        "type": "action",
+        "subType": "reveal",
+        "victoryPoints": 0,
+        "number": 5
+    },
+    {
+        "displayName": "Sight",
+        "displaySubtitle": "Reveal",
+        "displayText": "Reveal first row",
+        "value": "sight",
+        "type": "action",
+        "subType": "reveal",
+        "victoryPoints": 0,
+        "number": 6
+    },
+    {
+        "displayName": "Foresight",
+        "displaySubtitle": "Reveal",
+        "displayText": "Reveal second row",
+        "value": "foresight",
+        "type": "action",
+        "subType": "reveal",
+        "victoryPoints": 0,
+        "number": 7
+    },
+    {
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 8
+    },
+    {
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 9
+    },
+    {
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 10
+    },
+    {
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 11
+    },
+    {
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 12
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 13
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 14
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 15
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 16
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 17
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 18
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 19
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 20
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 21
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 22
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 23
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 24
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 25
+    },{
+        "displayName": "Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "Draw from 2nd Row",
+        "value": "draw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 26
+    },{
+        "displayName": "Spirit Spies",
+        "displaySubtitle": "Arrange",
+        "displayText": "Look at 4 Elements and return them in any order",
+        "value": "spiritSpies",
+        "type": "action",
+        "subType": "arrange",
+        "victoryPoints": 0,
+        "number": 27
+    },{
+        "displayName": "Spirit Spies",
+        "displaySubtitle": "Arrange",
+        "displayText": "Look at 4 Elements and return them in any order",
+        "value": "spiritSpies",
+        "type": "action",
+        "subType": "arrange",
+        "victoryPoints": 0,
+        "number": 28
+    },{
+        "displayName": "Spirit Spies",
+        "displaySubtitle": "Arrange",
+        "displayText": "Look at 4 Elements and return them in any order",
+        "value": "spiritSpies",
+        "type": "action",
+        "subType": "arrange",
+        "victoryPoints": 0,
+        "number": 29
+    },{
+        "displayName": "Spirit Spies",
+        "displaySubtitle": "Arrange",
+        "displayText": "Look at 4 Elements and return them in any order",
+        "value": "spiritSpies",
+        "type": "action",
+        "subType": "arrange",
+        "victoryPoints": 0,
+        "number": 30
+    }
+]

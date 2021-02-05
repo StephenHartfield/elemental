@@ -1,0 +1,38 @@
+[
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1
+    }
+]

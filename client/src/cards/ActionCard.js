@@ -6,11 +6,15 @@ const StyledContainer = styled.div`
     height: 150px;
     background-color: ${props => props.faceUp ? 'white' : 'gray'};
     border: 2px solid black;
+    border-radius: 5px;
     margin: 10px;
 `;
 
 const Card = styled.div`
     padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const CardHeader = styled.h3`
@@ -27,8 +31,10 @@ const CardSubHeader = styled.p`
 `;
 
 const TextContainer = styled.div`
-    width: 100%;
-    background-color: lightblue;
+    width: 90%;
+    border-radius: 8px;
+    padding: 2px;
+    background-color: #d9d5e5;
     height: 90px;
     display: flex;
     justify-content: center;
@@ -50,7 +56,7 @@ export default function ActionCard({card, faceUp}) {
             {localFaceUp && 
                 <Card>
                     <CardHeader>{card.displayName}</CardHeader>
-                    <div style={{borderTop: 'solid black 2px'}}></div>
+                    <div style={{borderTop: 'solid black 2px', width: '100%'}}></div>
                     <CardSubHeader>{card.displaySubtitle}</CardSubHeader>
                     <TextContainer>
                         <CardText>{card.displayText}</CardText>

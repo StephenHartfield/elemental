@@ -9,7 +9,11 @@ export default function setup(cards) {
     const setupData = {players: players.map(player => ({
             name: player,
             hand: [],
-            field: [],
+            field: [
+                {item: null, elements: []},
+                {item: null, elements: []},
+                {item: null, elements: []}
+            ],
             actionDeck: []
         })), 
         elementPool: [], 
@@ -17,6 +21,7 @@ export default function setup(cards) {
         itemDeck: []
     };
     cards.forEach(card => {
+        let added = false;
         if (card.type === 'element') {
             if(setupData.elementPool.length < setupRules.poolLayout.total) {
                 setupData.elementPool.push(card);
@@ -26,7 +31,6 @@ export default function setup(cards) {
             return;
         }
         if (card.type === 'action') {
-            let added = false;
             setupData.players.forEach(player => {
                 if(!added) {
                     if (player.hand.length < setupRules.initialHandSize) {
@@ -39,6 +43,21 @@ export default function setup(cards) {
                 } 
             })
             return;
+        }
+        if (card.type === 'item') {
+            setupData.players.forEach(player => {
+                if(!added) {
+                    player.field.forEach(itemSection => {
+                        if (!itemSection.item && !added) {
+                            itemSection.item = card;
+                            added=true;
+                        }
+                    })
+                }
+            });
+            if (!added) {
+                setupData.itemDeck.push(card);
+            }
         }
     });
     console.log(setupData);

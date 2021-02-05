@@ -9,10 +9,12 @@ export default function Game() {
 
     useEffect(() => {
         (async () => {
-            const elementsData = require("../elements.json");
-            const actionsData = require("../actions.json");
+            const elementsData = require("../cards/data/elements.json");
+            const actionsData = require("../cards/data/actions.json");
+            const itemsData = require("../cards/data/items.json");
             const newElements = copyElements(elementsData);
-            const cardData = [...newElements, ...actionsData];
+            // could do a check here, if the card is supposed to be included in game (based on # of players)
+            const cardData = [...newElements, ...actionsData, ...itemsData];
             setCards(cardData);
         })();
     }, []);

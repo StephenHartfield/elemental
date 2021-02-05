@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import AssetImport from '../assets/AssetImport';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -22,7 +23,8 @@ export default function StartGame({handleStartGame}) {
 
     return (
         <StyledContainer>
-            <Header>elemental</Header>
+            <img src={AssetImport.title} style={{height: '260px'}} />
+            <br />
             <br />
             <br />
             <br />

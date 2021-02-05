@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import assets from '../assets/AssetImport';
 
 const StyledContainer = styled.div`
     width: 60px;
     height: 100px;
     background-color: ${props => props.faceUp ? 'white' : 'gray'};
     border: 2px solid black;
+    border-radius: 3px;
 `;
 
 const Card = styled.div`
@@ -14,6 +16,7 @@ const Card = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 100%;
 `;
 
 const CardHeader = styled.h3`
@@ -36,7 +39,7 @@ export default function ElementCard({ card, faceUp, number }) {
                     <>
                         <CardHeader>{card.displayName}</CardHeader>
                         <div style={{borderTop: 'solid black 2px'}}></div>
-                        <img src="" style={{height: '60px', width: '100%', backgroundColor: "lightgray"}} />
+                        <img src={assets[card.value].active} style={{height: '60px', width: '100%', backgroundColor: "lightgray"}} />
                     </>
                 :
                     <p>{number}</p>

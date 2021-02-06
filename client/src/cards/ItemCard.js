@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import assets from '../assets/AssetImport';
+import CardOverlay from '../layout/CardOverlay';
 
 const StyledContainer = styled.div`
     width: 150px;
@@ -9,6 +10,7 @@ const StyledContainer = styled.div`
     border: 2px solid black;
     border-radius: 5px;
     margin: 10px;
+    transition: transform 2s;
 `;
 
 const Card = styled.div`
@@ -67,20 +69,27 @@ const CardText = styled.p`
     font-style: italic;
     font-size: 12px;
     margin: 0px;
-    text-align: center;
+    text-align: center; 
 `;
 
-export default function ItemCard({card, faceUp}) {
+export default function ItemCard({ card, faceUp }) {
     const [localFaceUp, setLocalFaceUp] = useState(faceUp);
+    const [showOverlay, setShowOverlay] = useState(false);
+
+    const handleHover = () => {
+        setShowOverlay(true);
+    }
 
     //TODO: first long text and give it proper linebreaks
     // example: split text @ every \n and return <Fragment> {textLine} <br /> </Fragment>
 
     //TODO create popup modal when hovering over any card
 
+    //TODO resize images to be smaller
+
     return (
-        <StyledContainer faceUp={localFaceUp}>
-            {localFaceUp && 
+        <StyledContainer onMouseEnter={handleHover} faceUp={localFaceUp}>
+            {localFaceUp &&
                 <Card>
                     <Top>
                         <Slots>
@@ -88,7 +97,7 @@ export default function ItemCard({card, faceUp}) {
                         </Slots>
                         <CardHeader>{card.displayName}</CardHeader>
                     </Top>
-                    <div style={{height: '100px'}}></div>
+                    <div style={{ height: '100px' }}></div>
                     <TextContainer>
                         <CardText>{card.displayText}</CardText>
                     </TextContainer>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { playGame } from '../helper-functions/gamePlay';
 import setup from '../helper-functions/setup';
 import { basicShuffle } from '../helper-functions/shuffle';
 import ElementDeck from '../layout/ElementDeck';
 import ElementPool from '../layout/ElementPool';
 import Field from '../layout/Field';
 import MainHand from '../layout/MainHand';
+import PlayerData from '../layout/PlayerData';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -36,6 +38,7 @@ export default function GameTable({cards}) {
         if(cards) {
             const shuffledCards = basicShuffle(cards);
             const initialSetUp = setup(shuffledCards);
+            playGame(initialSetUp);
             
             setElementPool(initialSetUp.elementPool);
             setelementDeck(initialSetUp.elementDeck);
@@ -53,7 +56,8 @@ export default function GameTable({cards}) {
                 <Hand />
             </StyledRow>
             {players && <Field orientation='bottom' field={players[0].field} />}
-            {players && <MainHand cards={players[0].hand} name={players[0].name} fieldData={players[0].field} />}
+            {players && <MainHand cards={players[0].hand} name={players[0].name} />}
+            {players && <PlayerData playerData={players} />}
         </StyledContainer>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import AssetImport from '../assets/AssetImport';
+import assets from '../assets/AssetImport';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -9,9 +9,6 @@ const StyledContainer = styled.div`
     align-items: center;
 `;
 
-const Header = styled.h1`
-    font-size: 50px;
-`;
 const StartBtn = styled.button`
     padding: 10px 20px;
     border-radius: 8px;
@@ -23,7 +20,7 @@ export default function StartGame({handleStartGame}) {
 
     return (
         <StyledContainer>
-            <img src={AssetImport.title} style={{height: '260px'}} />
+            <img src={assets.title} style={{height: '260px'}} alt='element logo' />
             <br />
             <br />
             <br />

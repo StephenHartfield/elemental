@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ActionCard from '../cards/ActionCard';
 import StandardHeader from '../Constants/StandardHeader';
+import GameContext from '../context/gameContext';
 
 const FixedHand = styled.div`
     position: fixed;
@@ -31,14 +32,33 @@ const DataContainer = styled.div`
     align-items: center;
 `;
 
-export default function MainHand({ cards, name, fieldData }) {
+const Hand = styled.div`
+    width: 90%;
+    height: 95%;
+    display: flex;
+    justify-content: space-around;
+`;
 
-    return (
+export default function MainHand({ cards, name, showOverlay }) {
+    const gameContext = useContext(GameContext);
+    const [isYourTurn, setIsYourTurn] = useState(false);
+
+    useEffect(() => {
+        console.log(gameContext.currentTurn);
+        if(gameContext.currentTurn.name === gameContext.yourName) {
+            setIsYourTurn(true);
+        }
+    }, [gameContext.currentTurn]);
+        
+        return (
         <FixedHand>
-            {cards && cards.map((card, idx) => <ActionCard card={card} key={`hand${idx}`} faceUp={true} />)}
+            <Hand>
+                {cards && cards.map((card, idx) => <ActionCard card={card} key={`hand${idx}`} faceUp={true} showOverlay={showOverlay} />)}
+            </Hand>
             <DataContainer>
                 <StandardHeader nomargin>{name}</StandardHeader>
                 <StandardHeader nomargin>0 VP</StandardHeader>
+                {isYourTurn && <StandardHeader>Plays: 2</StandardHeader>}
             </DataContainer>
         </FixedHand>
     )

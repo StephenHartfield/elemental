@@ -1,17 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import assets from '../assets/AssetImport';
-import CardOverlay from '../layout/CardOverlay';
-
-const StyledContainer = styled.div`
-    width: 150px;
-    height: 200px;
-    background-color: ${props => props.faceUp ? 'white' : 'gray'};
-    border: 2px solid black;
-    border-radius: 5px;
-    margin: 10px;
-    transition: transform 2s;
-`;
+import CardContainer from '../Constants/CardContainer';
 
 const Card = styled.div`
     padding: 8px;
@@ -38,8 +28,8 @@ const Slots = styled.div`
 const Slot = styled.img`
     font-size: 8px;
     margin: 0px;
-    height: 20px;
-    width: 20px;
+    height: ${props => props.inOverlay ? '50px' : '20px'};
+    width: ${props => props.inOverlay ? '50px' : '20px'};
 `;
 
 const CardHeader = styled.h3`
@@ -72,12 +62,17 @@ const CardText = styled.p`
     text-align: center; 
 `;
 
-export default function ItemCard({ card, faceUp }) {
+export default function ItemCard({ card, faceUp, showOverlay, inOverlay }) {
     const [localFaceUp, setLocalFaceUp] = useState(faceUp);
-    const [showOverlay, setShowOverlay] = useState(false);
+    const [localHover, setLocalHover] = useState(false);
 
     const handleHover = () => {
-        setShowOverlay(true);
+        setLocalHover(setTimeout(() => {
+            showOverlay(card);
+        }, 1500));
+    }
+    const removeHover = () => {
+        clearTimeout(localHover)
     }
 
     //TODO: first long text and give it proper linebreaks
@@ -88,12 +83,23 @@ export default function ItemCard({ card, faceUp }) {
     //TODO resize images to be smaller
 
     return (
-        <StyledContainer onMouseEnter={handleHover} faceUp={localFaceUp}>
+        <CardContainer 
+            inOverlay={inOverlay} 
+            onMouseEnter={handleHover}
+            onMouseLeave={removeHover}
+            faceUp={localFaceUp}
+            item
+        >
             {localFaceUp &&
                 <Card>
                     <Top>
                         <Slots>
-                            {card.slots.map((slot, idx) => <Slot src={assets[slot].inactive} key={`card${card.number}Slot${idx}`} />)}
+                            {card.slots.map((slot, idx) => 
+                            <Slot 
+                                src={assets[slot].inactive} 
+                                key={`card${card.number}Slot${idx}`}
+                                inOverlay={inOverlay}
+                            />)}
                         </Slots>
                         <CardHeader>{card.displayName}</CardHeader>
                     </Top>
@@ -103,6 +109,6 @@ export default function ItemCard({ card, faceUp }) {
                     </TextContainer>
                 </Card>
             }
-        </StyledContainer>
+        </CardContainer>
     )
 }

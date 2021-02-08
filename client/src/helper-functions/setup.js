@@ -4,9 +4,10 @@ const players = ["Jack", "Jill"];
 
 export default function setup(cards) {
     const setupRules = setupByPlayers[players.length];
-
+    
     // TODO: make model for player object
-    const setupData = {players: players.map(player => ({
+    const setupData = {
+        players: players.map(player => ({
             name: player,
             hand: [],
             field: [
@@ -16,16 +17,22 @@ export default function setup(cards) {
             ],
             actionDeck: []
         })), 
-        elementPool: [], 
+        elementPool: [...Array(setupRules.poolLayout.rows)].map(row => []), 
         elementDeck: [], 
         itemDeck: []
     };
     cards.forEach(card => {
         let added = false;
         if (card.type === 'element') {
-            if(setupData.elementPool.length < setupRules.poolLayout.total) {
-                setupData.elementPool.push(card);
-            } else {
+            setupData.elementPool.forEach(row => {
+                if(!added) {
+                    if(row.length < setupRules.poolLayout.columns) {
+                        row.push(card);
+                        added=true;
+                    }
+                }
+            })                
+            if(!added) {
                 setupData.elementDeck.push(card);
             }
             return;
@@ -60,6 +67,5 @@ export default function setup(cards) {
             }
         }
     });
-    console.log(setupData);
     return setupData;
 }

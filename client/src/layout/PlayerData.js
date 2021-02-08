@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import ActionCard from '../cards/ActionCard';
 import StandardHeader from '../Constants/StandardHeader';
 import assets from '../assets/AssetImport';
 
@@ -8,13 +7,15 @@ const Fixed = styled.div`
     position: fixed;
     top: 0;
     right: 0;
-    height: 450px;
-    background-color: yellow;
     border: 1px solid black;
-    opacity: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+`;
+
+const ExpandButton = styled.div`
+    width: 200px;
+    background-color: lightgray;
 `;
 
 const DataContainer = styled.div`
@@ -54,10 +55,16 @@ const ItemSlot = styled.img`
 `;
 
 export default function PlayerData({ playerData }) {
+    const [expanded, setExpanded] = useState(false);
+
+    const handleExpand = () => {
+        setExpanded(!expanded);
+    }
 
     return (
         <Fixed>
-            {playerData && playerData.map((player, idx) => (
+            <ExpandButton onClick={handleExpand}>Player Data</ExpandButton>
+            {expanded && playerData.map((player, idx) => (
                 <DataContainer key={`player${idx}`}>
                     <StandardHeader>{player.name}</StandardHeader>
                     {player.field && player.field.map((itemSection, idx) => (

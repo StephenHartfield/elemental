@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-const StyledContainer = styled.div`
-    width: 100px;
-    height: 150px;
-    background-color: ${props => props.faceUp ? 'white' : 'gray'};
-    border: 2px solid black;
-    border-radius: 5px;
-    margin: 10px;
-`;
+import CardContainer from '../Constants/CardContainer';
 
 const Card = styled.div`
     padding: 8px;
@@ -48,11 +40,27 @@ const CardText = styled.p`
     text-align: center;
 `;
 
-export default function ActionCard({card, faceUp}) {
+export default function ActionCard({card, faceUp, showOverlay, inOverlay}) {
     const [localFaceUp, setLocalFaceUp] = useState(faceUp);
+    const [localHover, setLocalHover] = useState(false);
+
+    const handleHover = () => {
+        setLocalHover(setTimeout(() => {
+            showOverlay(card);
+        }, 1500));
+    }
+    const removeHover = () => {
+        clearTimeout(localHover)
+    }
 
     return (
-        <StyledContainer faceUp={localFaceUp}>
+        <CardContainer 
+            onMouseEnter={handleHover} 
+            onMouseLeave={removeHover}
+            faceUp={localFaceUp}
+            isAction
+            inOverlay={inOverlay}
+        >
             {localFaceUp && 
                 <Card>
                     <CardHeader>{card.displayName}</CardHeader>
@@ -63,6 +71,6 @@ export default function ActionCard({card, faceUp}) {
                     </TextContainer>
                 </Card>
             }
-        </StyledContainer>
+        </CardContainer>
     )
 }

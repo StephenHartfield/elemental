@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import assets from '../assets/AssetImport';
-
-const StyledContainer = styled.div`
-    width: 60px;
-    height: 100px;
-    background-color: ${props => props.faceUp ? 'white' : 'gray'};
-    border: 2px solid black;
-    border-radius: 3px;
-`;
+import CardContainer from '../Constants/CardContainer';
 
 const Card = styled.div`
     padding: 2px;
@@ -33,7 +26,7 @@ export default function ElementCard({ card, faceUp, number }) {
     }
 
     return (
-        <StyledContainer onClick={handleClick} faceUp={localFaceUp}>
+        <CardContainer onClick={handleClick} faceUp={localFaceUp}>
             <Card>
                 {localFaceUp ?
                     <>
@@ -46,6 +39,6 @@ export default function ElementCard({ card, faceUp, number }) {
                 }
             </Card>
 
-        </StyledContainer>
+        </CardContainer>
     )
 }

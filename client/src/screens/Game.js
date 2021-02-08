@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { LogProvider } from '../context/logContext';
 import { copyElements } from '../helper-functions/createElementCopies';
 import GameTable from './GameTable';
 import StartGame from './StartGame';
@@ -23,9 +24,13 @@ export default function Game() {
         setAtGameTable(true);
     }
 
-    if(!atGameTable) {
+    if (!atGameTable) {
         return <StartGame handleStartGame={handleStartGame} />
     } else {
-        return <GameTable cards={cards} />
+        return (
+            <LogProvider>
+                <GameTable cards={cards} />
+            </LogProvider>
+        )
     }
 }

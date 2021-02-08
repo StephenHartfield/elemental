@@ -25,18 +25,16 @@ const StyledColumn = styled.div`
 
 export default function ElementPool({cards, numOfPlayers}) {
 
+    console.log(cards);
+
     return (
         <StyledLayout>
             <StandardHeader>Element Pool</StandardHeader>
-            {[...Array(setupByPlayers[numOfPlayers].poolLayout.rows)].map((row, idx) => (
+            {cards && cards.map((row, idx) => (
                 <StyledRow key={`row${idx}`}>
-                    {[...Array(setupByPlayers[numOfPlayers].poolLayout.columns)].map((column, cidx) => (
+                    {row.map((column, cidx) => (
                         <StyledColumn key={`column${cidx}`}>
-                            {cards && cards.map((card, cardIdx) => {
-                                if(cardIdx === idx+cidx) {
-                                    return <ElementCard key={`pool${cardIdx}`} card={card} />;
-                                }
-                            })}
+                            <ElementCard card={column} faceUp={false} />
                         </StyledColumn>
                     ))}
                 </StyledRow>

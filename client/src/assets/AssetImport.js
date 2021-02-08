@@ -9,10 +9,12 @@ import inactiveAirIcon from './IMG-0125.JPG';
 import title from './IMG_0126.jpg';
 
 
-export default {
+const assets = {
     title,
     water: {active: activeWaterIcon, inactive: inactiveWaterIcon}, 
     earth: {active: activeEarthIcon, inactive: inactiveEarthIcon},
     fire: {active: activeFireIcon, inactive: inactiveFireIcon},
     air: {active: activeAirIcon, inactive: inactiveAirIcon}
 }; 
+
+export default assets;

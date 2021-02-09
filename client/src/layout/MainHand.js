@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ActionCard from '../cards/ActionCard';
 import StandardHeader from '../Constants/StandardHeader';
 import GameContext from '../context/gameContext';
+import LogContext from '../context/logContext';
 
 const FixedHand = styled.div`
     position: fixed;
@@ -38,19 +39,34 @@ const Hand = styled.div`
     display: flex;
     justify-content: space-around;
 `;
+const DrawButton = styled.div`
+    background-color: green;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+`;
 
 export default function MainHand({ cards, name, showOverlay }) {
     const gameContext = useContext(GameContext);
+    const logContext = useContext(LogContext);
     const [isYourTurn, setIsYourTurn] = useState(false);
 
     useEffect(() => {
-        console.log(gameContext.currentTurn);
         if(gameContext.currentTurn.name === gameContext.yourName) {
             setIsYourTurn(true);
         }
-    }, [gameContext.currentTurn]);
+    }, [gameContext.currentTurn, gameContext.yourName]);
+
+    const handleDraw = () => {
+        logContext.addLog({
+            key: gameContext.currentTurn.key,
+            value: `${name} plays DRAW`
+        })
+        gameContext.draw(name);
+    }
         
-        return (
+    return (
         <FixedHand>
             <Hand>
                 {cards && cards.map((card, idx) => <ActionCard card={card} key={`hand${idx}`} faceUp={true} showOverlay={showOverlay} />)}
@@ -59,6 +75,7 @@ export default function MainHand({ cards, name, showOverlay }) {
                 <StandardHeader nomargin>{name}</StandardHeader>
                 <StandardHeader nomargin>0 VP</StandardHeader>
                 {isYourTurn && <StandardHeader>Plays: 2</StandardHeader>}
+                {isYourTurn && <DrawButton onClick={handleDraw}>Draw</DrawButton>}
             </DataContainer>
         </FixedHand>
     )

@@ -12,6 +12,7 @@ const Fixed = styled.div`
 const ExpandButton = styled.div`
     background-color: lightgray;
     width: 200px;
+    cursor: pointer;
 `;
 
 const LogContainer = styled.div`
@@ -33,7 +34,6 @@ export default function LogDisplay() {
     const [logs, setLogs] = useState(null);
 
     useEffect(() => {
-        console.log(logContext.logs);
         if (logContext.logs) {
             setLogs(logContext.logs);
         }

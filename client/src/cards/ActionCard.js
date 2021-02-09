@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CardContainer from '../Constants/CardContainer';
+import assets from '../assets/AssetImport';
 
 const Card = styled.div`
-    padding: 8px;
+    padding: ${props => props.full ? '0px' : '8px'};
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: ${props => props.full ? '100%' : ''};
+    height: ${props => props.full ? '100%' : ''};
 `;
 
 const CardHeader = styled.h3`
@@ -40,37 +43,51 @@ const CardText = styled.p`
     text-align: center;
 `;
 
-export default function ActionCard({card, faceUp, showOverlay, inOverlay}) {
+export default function ActionCard({ card, faceUp, showOverlay, inOverlay }) {
     const [localFaceUp, setLocalFaceUp] = useState(faceUp);
     const [localHover, setLocalHover] = useState(false);
+    const { actions } = assets.cards;
 
     const handleHover = () => {
         setLocalHover(setTimeout(() => {
             showOverlay(card);
         }, 1500));
     }
+    const handleClick = () => {
+        showOverlay(card);
+    }
     const removeHover = () => {
         clearTimeout(localHover)
     }
 
     return (
-        <CardContainer 
-            onMouseEnter={handleHover} 
-            onMouseLeave={removeHover}
+        <CardContainer
+            onMouseEnter={!inOverlay && handleHover}
+            onMouseLeave={!inOverlay && removeHover}
+            onClick={!inOverlay && handleClick}
             faceUp={localFaceUp}
             isAction
             inOverlay={inOverlay}
         >
-            {localFaceUp && 
-                <Card>
-                    <CardHeader>{card.displayName}</CardHeader>
-                    <div style={{borderTop: 'solid black 2px', width: '100%'}}></div>
-                    <CardSubHeader>{card.displaySubtitle}</CardSubHeader>
-                    <TextContainer>
-                        <CardText>{card.displayText}</CardText>
-                    </TextContainer>
-                </Card>
+            {localFaceUp &&
+                <>
+                    {
+                        actions[card.value] ?
+                            <Card full>
+                                <img src={actions[card.value]} style={{ height: '100%', width: '100%' }} />
+                            </Card>
+                            :
+                            <Card>
+                                <CardHeader>{card.displayName}</CardHeader>
+                                <div style={{ borderTop: 'solid black 2px', width: '100%' }}></div>
+                                <CardSubHeader>{card.displaySubtitle}</CardSubHeader>
+                                <TextContainer>
+                                    <CardText>{card.displayText}</CardText>
+                                </TextContainer>
+                            </Card>
+                    }
+                </>
             }
-        </CardContainer>
+        </CardContainer >
     )
 }

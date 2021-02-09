@@ -6,7 +6,98 @@
         "value": "fire",
         "type": "element",
         "subType": "",
-        "victoryPoints": 1
+        "victoryPoints": 1,
+        "id": "fire-1"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-2"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-3"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-4"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-5"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-6"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-7"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-8"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-9"
+    },
+    {
+        "displayName": "Fire",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "fire",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "fire-10"
     },
     {
         "displayName": "Earth",
@@ -15,7 +106,98 @@
         "value": "earth",
         "type": "element",
         "subType": "",
-        "victoryPoints": 1
+        "victoryPoints": 1,
+        "id": "earth-1"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-2"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-3"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-4"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-5"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-6"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-7"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-8"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-9"
+    },
+    {
+        "displayName": "Earth",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "earth",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "earth-10"
     },
     {
         "displayName": "Air",
@@ -24,7 +206,98 @@
         "value": "air",
         "type": "element",
         "subType": "",
-        "victoryPoints": 1
+        "victoryPoints": 1,
+        "id": "air-1"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-2"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-3"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-4"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-5"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-6"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-7"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-8"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-9"
+    },
+    {
+        "displayName": "Air",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "air",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "air-10"
     },
     {
         "displayName": "Water",
@@ -33,6 +306,97 @@
         "value": "water",
         "type": "element",
         "subType": "",
-        "victoryPoints": 1
+        "victoryPoints": 1,
+        "id": "water-1"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-2"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-3"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-4"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-5"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-6"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-7"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-8"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-9"
+    },
+    {
+        "displayName": "Water",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "water",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "water-10"
     }
 ]

@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import assets from '../assets/AssetImport';
 import CardContainer from '../Constants/CardContainer';
+import GameContext from '../context/gameContext';
+import LogContext from '../context/logContext';
 
 const Card = styled.div`
-    padding: 8px;
+    padding: ${props => props.full ? '0px' : '8px'};
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: ${props => props.full ? 'flex-start' : 'center'};
+    width: ${props => props.full ? '100%' : ''};
+    height: ${props => props.full ? '100%' : ''};
 `;
 
 const Top = styled.div`
     display: flex;
     width: 100%;
+    margin-left: ${props => props.full ? props.inOverlay ? '18px' : '15px' : ''};
     align-items: center;
     max-height: 40px;
     position: relative;
@@ -21,7 +26,7 @@ const Slots = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 0;
+    top: ${props => props.full ? props.inOverlay ? '20px' : '10px' : 0};
     left: 0;
     min-height: 100px;
 `;
@@ -62,18 +67,28 @@ const CardText = styled.p`
     text-align: center; 
 `;
 
-export default function ItemCard({ card, faceUp, showOverlay, inOverlay }) {
+export default function ItemCard({ card, faceUp, showOverlay, inOverlay, selectCard }) {
     const [localFaceUp, setLocalFaceUp] = useState(faceUp);
     const [localHover, setLocalHover] = useState(false);
+    const [slots, setSlots] = useState(null);
+    const { icons } = assets;
+    const { items } = assets.cards;
 
     const handleHover = () => {
         setLocalHover(setTimeout(() => {
             showOverlay(card);
-        }, 1500));
+        }, 1000));
+    }
+    const handlePickCard = () => {
+        selectCard(card);
+    }
+    const handleClick = () => {
+        showOverlay(card);
     }
     const removeHover = () => {
         clearTimeout(localHover)
     }
+    
 
     //TODO: first long text and give it proper linebreaks
     // example: split text @ every \n and return <Fragment> {textLine} <br /> </Fragment>
@@ -83,31 +98,51 @@ export default function ItemCard({ card, faceUp, showOverlay, inOverlay }) {
     //TODO resize images to be smaller
 
     return (
-        <CardContainer 
-            inOverlay={inOverlay} 
-            onMouseEnter={handleHover}
-            onMouseLeave={removeHover}
+        <CardContainer
+            inOverlay={inOverlay}
+            highlight={card.highlight}
+            onMouseEnter={!inOverlay ? handleHover : null}
+            onMouseLeave={!inOverlay ? removeHover : null}
+            onClick={card.highlight ? handlePickCard : !inOverlay ? handleClick : null}
             faceUp={localFaceUp}
             item
         >
             {localFaceUp &&
-                <Card>
-                    <Top>
-                        <Slots>
-                            {card.slots.map((slot, idx) => 
-                            <Slot 
-                                src={assets[slot].inactive} 
-                                key={`card${card.number}Slot${idx}`}
-                                inOverlay={inOverlay}
-                            />)}
-                        </Slots>
-                        <CardHeader>{card.displayName}</CardHeader>
-                    </Top>
-                    <div style={{ height: '100px' }}></div>
-                    <TextContainer>
-                        <CardText>{card.displayText}</CardText>
-                    </TextContainer>
-                </Card>
+                <>
+                    {items[card.value] ?
+                        <Card full>
+                            <Top full inOverlay={inOverlay}>
+                                <Slots full inOverlay={inOverlay}>
+                                    {card.slots.map((slot, idx) => 
+                                        <Slot
+                                            src={icons[slot.name][slot.isActive ? 'active' : 'inactive']}
+                                            key={`card${card.number}Slot${idx}`}
+                                            inOverlay={inOverlay}
+                                        />)}
+                                </Slots>
+                            </Top>
+                            <img src={items[card.value]} style={{ height: '100%', width: '100%' }} />
+                        </Card>
+                        :
+                        <Card>
+                            <Top>
+                                <Slots>
+                                    {card.slots.map((slot, idx) =>
+                                        <Slot
+                                            src={icons[slot.name][slot.isActive ? 'active' : 'inactive']}
+                                            key={`card${card.number}Slot${idx}`}
+                                            inOverlay={inOverlay}
+                                        />)}
+                                </Slots>
+                                <CardHeader>{card.displayName}</CardHeader>
+                            </Top>
+                            <div style={{ height: '100px' }}></div>
+                            <TextContainer>
+                                <CardText>{card.displayText}</CardText>
+                            </TextContainer>
+                        </Card>
+                    }
+                </>
             }
         </CardContainer>
     )

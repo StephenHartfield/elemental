@@ -10,16 +10,39 @@ const Fixed = styled.div`
     position: fixed;
     width: 100%;
     height: 100%;
+    margin-top: -120px;
     display: flex;
     justify-content: center;
+    align-items: center;
 `;
 const CardContainer = styled.div`
     height: 500px;
     width: 300px;
-    background-color: orange;
+    display: flex;
+    margin-left: ${props => props.margin ? '130px' : ''};
+    justify-content: center;
+    align-items: center;
+`;
+const PlayContainer = styled.div`
+    width: 120px;
+    height: 100px;
+    border-radius: 60px;
+    margin-left: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: gray;
+`;
+const PlayButton = styled.div`
+    height: 30px;
+    width: 80px;
+    border-radius: 10px;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
 `;
 
 export default function CardOverlay({ card, showOverlay }) {
@@ -34,28 +57,31 @@ export default function CardOverlay({ card, showOverlay }) {
     }, [gameContext.currentTurn]);
 
     const handleOffCard = () => {
-        setTimeout(() => {
-            showOverlay(null);
-        }, 1500)
+        showOverlay(null);
     }
     const handlePlay = () => {
         logContext.addLog({
             key: gameContext.currentTurn.key,
-            value: `${gameContext.yourName} plays ${card.displayName}`
+            value: `${gameContext.currentTurn.name} plays ${card.displayName}`
         })
         const actionResult = playAction(card.value);
     }
 
     return (
         <Fixed onClick={handleOffCard}>
-            <CardContainer>
+            <CardContainer margin={isYourTurn && card.type === 'action'}>
                 {card.type === 'item' ?
                     <ItemCard card={card} faceUp={true} inOverlay={true} />
                     :
                     <ActionCard card={card} faceUp={true} inOverlay={true} />
                 }
             </CardContainer>
-            {isYourTurn && <button onClick={handlePlay}>Play</button>}
+            {isYourTurn && card.type === 'action' ? 
+                <PlayContainer>
+                    <PlayButton onClick={handlePlay}>Play</PlayButton>
+                </PlayContainer>
+            :
+                null}
         </Fixed>
     )
 }

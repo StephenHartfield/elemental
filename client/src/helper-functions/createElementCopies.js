@@ -1,20 +1,27 @@
 export function copyElements(elements) {
     const newElements = [];
-    elements.forEach(element => {
+    for(let i=0; i < elements.length; i++) {
         if (
-            element.displayName === "Fire" ||
-            element.displayName === "Water" ||
-            element.displayName === "Earth" ||
-            element.displayName === "Air"
+            elements[i].displayName === "Fire" ||
+            elements[i].displayName === "Water" ||
+            elements[i].displayName === "Earth" ||
+            elements[i].displayName === "Air"
         ) {
             let copies = 10;
             while(copies > 0) {
-                newElements.push(element);
+                const newElement = elements[i].constructor();
+                for(var attr in elements[i]) {
+                    if(elements[i].hasOwnProperty(attr)) {
+                        newElement[attr] = elements[i][attr];
+                    }
+                }
+                newElement['id'] = `${newElement.value}-${copies}`;
+                newElements.push(newElement);
                 copies--;
             }
         } else {
-            newElements.push(element);
+            newElements.push(elements[i]);
         }
-    });
+    };
     return newElements;
 }

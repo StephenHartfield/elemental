@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ElementCard from '../cards/ElementCard';
-import setupByPlayers from '../Constants/setupLayoutByPlayers';
-import StandardHeader from '../Constants/StandardHeader';
+import GameContext from '../context/gameContext';
 
 const StyledLayout = styled.div`
     display: flex;
@@ -24,12 +23,16 @@ const StyledColumn = styled.div`
 `;
 
 export default function ElementPool({cards, numOfPlayers}) {
+    const gameContext = useContext(GameContext);
+    const ePool = useRef();
 
-    console.log(cards);
+    useEffect(() => {
+        ePool.current.focus();
+    }, [gameContext.focusBool]);
 
     return (
         <StyledLayout>
-            <StandardHeader>Element Pool</StandardHeader>
+            <input ref={ePool} style={{display: 'hide'}} />
             {cards && cards.map((row, idx) => (
                 <StyledRow key={`row${idx}`}>
                     {row.map((column, cidx) => (

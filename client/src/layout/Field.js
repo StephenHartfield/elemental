@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ItemCard from '../cards/ItemCard';
+import GameContext from '../context/gameContext';
+import LogContext from '../context/logContext';
 
 const StyledField = styled.div`
     height: 300px;
@@ -22,12 +24,28 @@ const Items = styled.div`
 `;
 
 export default function Field({ field, orientation, showOverlay }) {
+    const gameContext = useContext(GameContext);
+    const logContext = useContext(LogContext);
 
+    const selectCard = (card) => {
+        logContext.addLog({
+            key: gameContext.currentTurn.key,
+            value: `${gameContext.currentTurn.name} adds ${gameContext.cardToDraw} to ${card.displayName}`
+        })
+        gameContext.pickItem(field, card);
+    }
     return (
         <StyledField pos={orientation}>
             <Items>
                 {field && field.map((itemSection, idx) => (
-                    <ItemCard card={itemSection.item} showOverlay={showOverlay} faceUp={true} key={`${orientation}${idx}`} />
+                    <ItemCard 
+                        card={itemSection.item} 
+                        elements={itemSection.elements}
+                        showOverlay={showOverlay} 
+                        faceUp={true} 
+                        selectCard={selectCard} 
+                        key={`${orientation}${idx}`} 
+                    />
                 ))}
             </Items>
         </StyledField>

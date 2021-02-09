@@ -16,6 +16,7 @@ const Fixed = styled.div`
 const ExpandButton = styled.div`
     width: 200px;
     background-color: lightgray;
+    cursor: pointer;
 `;
 
 const DataContainer = styled.div`
@@ -56,6 +57,7 @@ const ItemSlot = styled.img`
 
 export default function PlayerData({ playerData }) {
     const [expanded, setExpanded] = useState(false);
+    const {icons} = assets;
 
     const handleExpand = () => {
         setExpanded(!expanded);
@@ -72,7 +74,7 @@ export default function PlayerData({ playerData }) {
                             <ItemName>{itemSection.item.displayName}</ItemName>
                             <Slots>
                                 {itemSection.item.slots.map((slot, slIdx) => (
-                                    <ItemSlot key={`slot${idx + slIdx}`} src={assets[slot].inactive} />
+                                    <ItemSlot key={`slot${idx + slIdx}`} src={icons[slot].inactive} />
                                 ))}
                             </Slots>
                         </ItemSection>

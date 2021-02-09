@@ -8,7 +8,7 @@ const StyledContainer = styled.div`
             '150px' : 
             props.isAction ? 
                 '100px' :
-                '60px'};
+                '65px'};
     height: ${props => props.inOverlay ? 
         '90%' : 
         props.item ? 
@@ -17,8 +17,8 @@ const StyledContainer = styled.div`
                 '150px' :
                 '100px'};
     background-color: ${props => props.faceUp ? 'white' : 'gray'};
-    border: 2px solid black;
     border-radius: 5px;
+    border: ${props => props.highlight ? '5px solid yellow' : ""};
 `;
 
 export default function CardContainer(props) {

@@ -1,14 +1,16 @@
 import setupByPlayers from "../Constants/setupLayoutByPlayers";
 
 const players = ["Jack", "Jill"];
+const orientations = ["bottom", "top", "left", "right"];
 
 export default function setup(cards) {
     const setupRules = setupByPlayers[players.length];
     
     // TODO: make model for player object
     const setupData = {
-        players: players.map(player => ({
+        players: players.map((player, idx) => ({
             name: player,
+            orientation: orientations[idx],
             hand: [],
             field: [
                 {item: null, elements: []},

@@ -17,7 +17,7 @@ const StyledContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 40px 12%;
-    margin-bottom: 300px;
+    margin-bottom: 150px;
 `;
 
 const StyledRow = styled.div`
@@ -35,6 +35,8 @@ export default function GameTable({cards}) {
     const [elementPool, setElementPool] = useState(null);
     const [elementDeck, setElementDeck] = useState(null);
     const [players, setPlayers] = useState(null);
+    const [playerOne, setPlayerOne] = useState(null);
+    const [playerTwo, setPlayerTwo] = useState(null);
     const [overlayCard, setOverlayCard] = useState(null);
     const gameContext = useContext(GameContext);
 
@@ -46,9 +48,21 @@ export default function GameTable({cards}) {
             setElementPool(initialSetUp.elementPool);
             setElementDeck(initialSetUp.elementDeck);
             setPlayers(initialSetUp.players);
+            setPlayerOne(initialSetUp.players.find(player => player.orientation === 'bottom'));
+            setPlayerTwo(initialSetUp.players.find(player => player.orientation === 'top'));
             gameContext.setup(initialSetUp);
         }
-    }, [cards]);
+    }, []);
+
+    useEffect(() => {
+        if(gameContext.currentSetup) {
+            setElementPool(gameContext.currentSetup.elementPool);
+            setElementDeck(gameContext.currentSetup.elementDeck);
+            setPlayers(gameContext.currentSetup.players);
+            setPlayerOne(gameContext.currentSetup.players.find(player => player.orientation === 'bottom'));
+            setPlayerTwo(gameContext.currentSetup.players.find(player => player.orientation === 'top'));
+        }
+    }, [gameContext.setupUpdate]);
 
     const showOverlay = (card) => {
         setOverlayCard(card);
@@ -56,7 +70,7 @@ export default function GameTable({cards}) {
 
     return (
         <StyledContainer>
-            {players && <Field orientation='top' showOverlay={showOverlay} field={players[1].field} />}
+            {playerTwo && <Field orientation='top' showOverlay={showOverlay} field={playerTwo.field} />}
             <StyledRow>
                 <Hand />
                 {elementPool && <ElementPool cards={elementPool} numOfPlayers={players.length} />}
@@ -64,8 +78,8 @@ export default function GameTable({cards}) {
                 <Hand />
             </StyledRow>
             <LogDisplay />
-            {players && <Field orientation='bottom' showOverlay={showOverlay} field={players[0].field} />}
-            {players && <MainHand cards={players[0].hand} showOverlay={showOverlay} name={players[0].name} />}
+            {players && playerOne ? <Field orientation='bottom' showOverlay={showOverlay} field={playerOne.field} /> : null}
+            {playerOne && <MainHand cards={playerOne.hand} showOverlay={showOverlay} name={playerOne.name} />}
             {players && <PlayerData playerData={players} />}
             {overlayCard && <CardOverlay card={overlayCard} showOverlay={showOverlay} />}
         </StyledContainer>

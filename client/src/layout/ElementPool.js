@@ -27,17 +27,16 @@ export default function ElementPool({cards, numOfPlayers}) {
     const ePool = useRef();
 
     useEffect(() => {
-        ePool.current.focus();
+        ePool.current.scrollIntoView({behavior: "smooth"});
     }, [gameContext.focusBool]);
 
     return (
-        <StyledLayout>
-            <input ref={ePool} style={{display: 'hide'}} />
+        <StyledLayout ref={ePool}>
             {cards && cards.map((row, idx) => (
                 <StyledRow key={`row${idx}`}>
                     {row.map((column, cidx) => (
                         <StyledColumn key={`column${cidx}`}>
-                            <ElementCard card={column} faceUp={false} />
+                            <ElementCard card={column} />
                         </StyledColumn>
                     ))}
                 </StyledRow>

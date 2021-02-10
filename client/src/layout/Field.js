@@ -30,7 +30,7 @@ export default function Field({ field, orientation, showOverlay }) {
     const selectCard = (card) => {
         logContext.addLog({
             key: gameContext.currentTurn.key,
-            value: `${gameContext.currentTurn.name} adds ${gameContext.cardToDraw} to ${card.displayName}`
+            value: `${gameContext.currentTurn.name} adds ${gameContext.cardToDraw.displayName} to ${card.displayName}`
         })
         gameContext.pickItem(field, card);
     }

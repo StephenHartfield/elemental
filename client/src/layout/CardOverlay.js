@@ -4,7 +4,6 @@ import ActionCard from '../cards/ActionCard';
 import ItemCard from '../cards/ItemCard';
 import GameContext from '../context/gameContext';
 import LogContext from '../context/logContext';
-import playAction from '../helper-functions/playAction';
 
 const Fixed = styled.div`
     position: fixed;
@@ -17,7 +16,7 @@ const Fixed = styled.div`
 `;
 const CardContainer = styled.div`
     height: 500px;
-    width: 300px;
+    width: 340px;
     display: flex;
     margin-left: ${props => props.margin ? '130px' : ''};
     justify-content: center;
@@ -64,7 +63,9 @@ export default function CardOverlay({ card, showOverlay }) {
             key: gameContext.currentTurn.key,
             value: `${gameContext.currentTurn.name} plays ${card.displayName}`
         })
-        const actionResult = playAction(card.value);
+        // const actionResult = playAction(card.value);
+        gameContext.playAction(card.value);
+        showOverlay(null);
     }
 
     return (

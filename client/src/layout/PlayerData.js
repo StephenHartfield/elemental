@@ -22,7 +22,7 @@ const ExpandButton = styled.div`
 const DataContainer = styled.div`
     background-color: #ffffff;
     height: 90%;
-    width: 160px;
+    width: 90%;
     padding: 2px;
     border-radius: 4px;
     display: flex;
@@ -46,13 +46,13 @@ const ItemName = styled.p`
 const Slots = styled.div`
     display: flex;
     justify-content: space-around;
-    width: 40%;
+    width: 42%;
 `;
 const ItemSlot = styled.img`
     margin: 0px;
     font-size: 10px;
-    height: 20px;
-    width: 20px;
+    height: 24px;
+    width: 26px;
 `;
 
 export default function PlayerData({ playerData }) {
@@ -74,7 +74,7 @@ export default function PlayerData({ playerData }) {
                             <ItemName>{itemSection.item.displayName}</ItemName>
                             <Slots>
                                 {itemSection.item.slots.map((slot, slIdx) => (
-                                    <ItemSlot key={`slot${idx + slIdx}`} src={icons[slot].inactive} />
+                                    <ItemSlot key={`slot${idx + slIdx}`} src={icons[slot.name][slot.isActive ? 'active' : 'inactive']} />
                                 ))}
                             </Slots>
                         </ItemSection>

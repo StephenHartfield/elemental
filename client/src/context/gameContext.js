@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import actionTypes from '../helper-functions/actionTypes';
 import addElementToField from '../helper-functions/addElementToField';
+import determineNextTurn from '../helper-functions/determineNextTurn';
 import getFirstRow from '../helper-functions/getFirstRow';
 import getMatchedItem from '../helper-functions/getMatchedItem';
+import poolFaceDown from '../helper-functions/poolFaceDown';
 import removeElementPoolHighlights from '../helper-functions/removeElementPoolHighlights';
+import removeItemHighlights from '../helper-functions/removeItemHighlights';
 
 const GameContext = React.createContext();
 
@@ -25,7 +29,8 @@ function GameProvider(props) {
 
     const determineFirstTurn = (initSetup) => {
         const numOfPlayers = initSetup.players.length; 
-        return Math.floor(Math.random() * numOfPlayers);
+        // return Math.floor(Math.random() * numOfPlayers);
+        return 0;
     }
 
     const play = (initSetup) => {
@@ -47,9 +52,31 @@ function GameProvider(props) {
         // give overlay of "pick from first row"
         setFocusBool(!focusBool); // focus on elementPool
         setNumToPick(1);
-        const firstRowToHighlight = getFirstRow(name, currentSetup);
+        const firstRowToHighlight = getFirstRow(name, currentSetup, 'highlight', true);
         setCurrentSetup(firstRowToHighlight);
         setTypeInPlay("draw");
+    }
+
+    const playAction = (actionType) => {
+        const newSetup = actionTypes(actionType, currentSetup, currentTurn);
+        setTypeInPlay(actionType);
+        setCurrentSetup(newSetup);
+        setFocusBool(!focusBool);
+    }
+
+    const endAction = () => {
+        let newSetup = currentSetup;
+        if(typeInPlay === 'sight') {
+            newSetup = poolFaceDown(newSetup);
+        }
+        if(typeInPlay === 'draw') {
+            newSetup = removeItemHighlights(newSetup, currentTurn.name);
+        }
+        setCurrentSetup(newSetup);
+        setUpdateSetup(!setupUpdate);
+        const nextTurn = determineNextTurn(currentTurn, newSetup);
+        setTypeInPlay("");
+        setCurrentTurn(nextTurn);
     }
 
     const pickElement = (card) => {
@@ -69,11 +96,9 @@ function GameProvider(props) {
     const pickItem = (field, item) => {
         if(typeInPlay === 'draw') {
             const newSetup = addElementToField(cardToDraw, item, currentTurn.name, currentSetup);
-            console.log(newSetup);
-            setCurrentSetup(newSetup);
-            setUpdateSetup(!setupUpdate);
-            const yourField = newSetup.players.findIndex(player => player.name === currentTurn.name);
-            return newSetup.players[yourField].field;
+            // scenario of finishing item
+
+            endAction();
         }
     }
 
@@ -85,12 +110,15 @@ function GameProvider(props) {
                 yourName,
                 focusBool,
                 draw,
+                playAction,
+                endAction,
                 currentSetup,
                 numToPick,
                 pickElement,
                 pickItem,
                 setupUpdate,
-                cardToDraw
+                cardToDraw,
+                typeInPlay
             }}
         >
             {props.children}

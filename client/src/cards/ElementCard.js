@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import assets from '../assets/AssetImport';
 import CardContainer from '../Constants/CardContainer';
@@ -13,11 +13,15 @@ const Card = styled.div`
     height: 100%;
 `;
 
-export default function ElementCard({ card, faceUp, number }) {
-    const [localFaceUp, setLocalFaceUp] = useState(faceUp);
+export default function ElementCard({ card }) {
+    const [localFaceUp, setLocalFaceUp] = useState(false);
     const {elements} = assets.cards;
     const gameContext = useContext(GameContext);
     const logContext = useContext(LogContext);
+
+    useEffect(() => {
+        setLocalFaceUp(card.isFaceUp);
+    }, [card.isFaceUp]);
 
     const handleClick = () => {
         setLocalFaceUp(!localFaceUp);
@@ -37,7 +41,7 @@ export default function ElementCard({ card, faceUp, number }) {
         >
             <Card>
                 {localFaceUp ?
-                        <img src={elements[card.value]} style={{height: '100%', width: '100%', backgroundColor: "lightgray"}} />
+                    <img src={elements[card.value]} style={{height: '100%', width: '100%', backgroundColor: "lightgray"}} />
                 :
                     <img src={elements.back} style={{height: '100%', width: '100%'}} />
                 }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.div`
     width: ${props => props.inOverlay ? 
-        '90%' : 
+        '100%' : 
         props.item ? 
             '150px' : 
             props.isAction ? 
@@ -18,7 +18,7 @@ const StyledContainer = styled.div`
                 '100px'};
     background-color: ${props => props.faceUp ? 'white' : 'gray'};
     border-radius: 5px;
-    border: ${props => props.highlight ? '5px solid yellow' : ""};
+    border: ${props => props.highlight ? props.inOverlay ? "" : '5px solid yellow' : ""};
 `;
 
 export default function CardContainer(props) {

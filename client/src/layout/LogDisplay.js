@@ -18,8 +18,9 @@ const ExpandButton = styled.div`
 const LogContainer = styled.div`
     padding: 10px;
     height: 400px;
+    max-width: 180px;
     max-height: 400px;
-    overflow-y: scroll;
+    overflow: scroll;
 `;
 const List = styled.ul`
     padding: 0px;
@@ -35,6 +36,7 @@ export default function LogDisplay() {
 
     useEffect(() => {
         if (logContext.logs) {
+            console.log(logContext.logs);
             setLogs(logContext.logs);
         }
     }, [logContext.logs]);
@@ -43,6 +45,7 @@ export default function LogDisplay() {
         setExpanded(!expanded);
     }
 
+
     return (
         <Fixed>
             <ExpandButton onClick={handleExpand} >Game Log</ExpandButton>
@@ -50,9 +53,16 @@ export default function LogDisplay() {
                 <LogContainer>
                     {logs ?
                         <List>
-                            {Object.keys(logs).map((log, idx) => (
-                                <ListItem key={`log${idx}`}>{logs[log]}</ListItem>
-                            ))}
+                            {Object.keys(logs).map((log, idx) => {
+                                if (logs[log].length > 1) {
+                                    return logs[log].map((line, lidx) => (
+                                        <ListItem key={`log${lidx+1 * idx}`}>- {line}</ListItem>
+                                    ))
+                                } else {
+                                    return <ListItem key={`log${idx}`}>- {logs[log][0]}</ListItem>
+                                }
+
+                            })}
                         </List>
                         :
                         <p>No Logs</p>

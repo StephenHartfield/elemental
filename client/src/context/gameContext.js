@@ -114,7 +114,9 @@ function GameProvider(props) {
                         type: 'discardedElement',
                         key: currentTurn.key,
                         value: `${card.displayName} is discarded`
-                    })
+                    });
+                    newSetup.elementDeck.unshift(card);
+                    console.log(newSetup.elementDeck);
                     endAction(card);
                 }
             }

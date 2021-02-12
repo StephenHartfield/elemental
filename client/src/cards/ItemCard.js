@@ -33,8 +33,8 @@ const Slots = styled.div`
 const Slot = styled.img`
     font-size: 8px;
     margin: 0px;
-    height: ${props => props.inOverlay ? '50px' : '24px'};
-    width: ${props => props.inOverlay ? '50px' : '24px'};
+    height: ${props => props.inOverlay ? '60px' : '26px'};
+    width: ${props => props.inOverlay ? '60px' : '26px'};
 `;
 
 const CardHeader = styled.h3`

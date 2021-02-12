@@ -16,7 +16,7 @@ const Card = styled.div`
 export default function ElementCard({ card }) {
     const [localFaceUp, setLocalFaceUp] = useState(false);
     const [isFading, setIsFading] = useState(false);
-    const {elements} = assets.cards;
+    const { elements } = assets.cards;
     const gameContext = useContext(GameContext);
     const logContext = useContext(LogContext);
 
@@ -25,7 +25,7 @@ export default function ElementCard({ card }) {
     }, [card.isFaceUp]);
 
     useEffect(() => {
-        if(gameContext.fadeCard && gameContext.fadeCard.id === card.id) {
+        if (gameContext.fadeCard && gameContext.fadeCard.id === card.id) {
             setIsFading(true);
             setTimeout(() => {
                 setLocalFaceUp(card.isFaceUp);
@@ -44,18 +44,24 @@ export default function ElementCard({ card }) {
     }
 
     return (
-        <CardContainer 
-            highlight={card.highlight} 
+        <CardContainer
+            highlight={card.highlight}
             isFading={isFading}
-            noborder 
-            onClick={card.highlight && gameContext.numToPick > 0 ? handleClick : null} 
+            noborder
+            onClick={card.highlight && gameContext.numToPick > 0 ? handleClick : null}
             faceUp={localFaceUp}
         >
             <Card>
                 {localFaceUp ?
-                    <img src={elements[card.value]} style={{height: '100%', width: '100%', backgroundColor: "lightgray"}} />
-                :
-                    <img src={elements.back} style={{height: '100%', width: '100%'}} />
+                    <>
+                        {elements[card.value] ?
+                            <img src={elements[card.value]} style={{ height: '100%', width: '100%', backgroundColor: "lightgray" }} />
+                            :
+                            <p>{card.displayName}</p>
+                        }
+                    </>
+                    :
+                    <img src={elements.back} style={{ height: '100%', width: '100%' }} />
                 }
             </Card>
 

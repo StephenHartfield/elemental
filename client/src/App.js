@@ -1,12 +1,15 @@
 import React from 'react';
 import Game from './screens/Game';
-import {GameProvider} from './context/gameContext';
+import { GameProvider } from './context/gameContext';
+import { LogProvider } from './context/logContext';
 
 function App() {
   return (
-    <GameProvider>
-      <Game />
-    </GameProvider>
+    <LogProvider>
+      <GameProvider>
+        <Game />
+      </GameProvider>
+    </LogProvider>
   );
 }
 

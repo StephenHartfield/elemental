@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import actionTypes from '../helper-functions/actionTypes';
 import addElementToField from '../helper-functions/addElementToField';
 import determineNextTurn from '../helper-functions/determineNextTurn';
@@ -9,6 +9,7 @@ import itemAbilities from '../helper-functions/itemAbilities';
 import poolFaceDown from '../helper-functions/poolFaceDown';
 import removeElementPoolHighlights from '../helper-functions/removeElementPoolHighlights';
 import removeItemHighlights from '../helper-functions/removeItemHighlights';
+import LogContext from './logContext';
 
 const GameContext = React.createContext();
 
@@ -23,6 +24,7 @@ function GameProvider(props) {
     const [typeInPlay, setTypeInPlay] = useState("");
     const [cardsToDraw, setCardsToDraw] = useState(null);
     const [fadeCard, setFadeCard] = useState(null);
+    const logContext = useContext(LogContext);
 
     const setup = (initSetup) => {
         setCurrentSetup(initSetup);
@@ -67,15 +69,15 @@ function GameProvider(props) {
         setFocusBool(!focusBool);
     }
 
-    const endAction = () => {
+    const endAction = (card) => {
         let newSetup = currentSetup;
         if(typeInPlay === 'reveal') {
             newSetup = poolFaceDown(newSetup);
         }
         if(typeInPlay === 'draw') {
             newSetup = removeItemHighlights(newSetup, currentTurn.name);
+            handleDrawElement(cardsToDraw ? cardsToDraw : card);
         }
-        handleDrawElement(cardsToDraw);
         setCurrentSetup(newSetup);
         setUpdateSetup(!setupUpdate);
         const nextTurn = determineNextTurn(currentTurn, newSetup);
@@ -97,15 +99,24 @@ function GameProvider(props) {
 
     const pickElement = (card) => {
         if(typeInPlay === 'draw') {
-            let newSetup = null;
-            newSetup = getMatchedItem(card, currentSetup, currentTurn.name);
-            setNumToPick(numToPick-1);
-            if(numToPick == 1) {
-                newSetup = removeElementPoolHighlights(newSetup);
-            }
-            // handleDrawElement(card);
-            setCurrentSetup(newSetup);
+            let newSetup = currentSetup;
+            const newSetupItemHighlight = getMatchedItem(card, currentSetup, currentTurn.name);
             setCardsToDraw(card);
+            if(newSetupItemHighlight) {
+                newSetup = newSetupItemHighlight;
+            }
+            setNumToPick(numToPick-1);
+            if(numToPick == 1) { // will be 0 after function finishes and state updates
+                newSetup = removeElementPoolHighlights(newSetup);
+                if(!newSetupItemHighlight) {
+                    logContext.addLog({
+                        key: currentTurn.key,
+                        value: `${card.displayName} is discarded`
+                    })
+                    endAction(card);
+                }
+            }
+            setCurrentSetup(newSetup);
             setUpdateSetup(!setupUpdate);
         }
     }

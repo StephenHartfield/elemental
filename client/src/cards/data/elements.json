@@ -88,28 +88,6 @@
         "isFaceUp": false
     },
     {
-        "displayName": "Fire",
-        "displaySubtitle": "",
-        "displayText": "",
-        "value": "fire",
-        "type": "element",
-        "subType": "",
-        "victoryPoints": 1,
-        "id": "fire-9",
-        "isFaceUp": false
-    },
-    {
-        "displayName": "Fire",
-        "displaySubtitle": "",
-        "displayText": "",
-        "value": "fire",
-        "type": "element",
-        "subType": "",
-        "victoryPoints": 1,
-        "id": "fire-10",
-        "isFaceUp": false
-    },
-    {
         "displayName": "Earth",
         "displaySubtitle": "",
         "displayText": "",
@@ -195,28 +173,6 @@
         "subType": "",
         "victoryPoints": 1,
         "id": "earth-8",
-        "isFaceUp": false
-    },
-    {
-        "displayName": "Earth",
-        "displaySubtitle": "",
-        "displayText": "",
-        "value": "earth",
-        "type": "element",
-        "subType": "",
-        "victoryPoints": 1,
-        "id": "earth-9",
-        "isFaceUp": false
-    },
-    {
-        "displayName": "Earth",
-        "displaySubtitle": "",
-        "displayText": "",
-        "value": "earth",
-        "type": "element",
-        "subType": "",
-        "victoryPoints": 1,
-        "id": "earth-10",
         "isFaceUp": false
     },
     {
@@ -308,28 +264,6 @@
         "isFaceUp": false
     },
     {
-        "displayName": "Air",
-        "displaySubtitle": "",
-        "displayText": "",
-        "value": "air",
-        "type": "element",
-        "subType": "",
-        "victoryPoints": 1,
-        "id": "air-9",
-        "isFaceUp": false
-    },
-    {
-        "displayName": "Air",
-        "displaySubtitle": "",
-        "displayText": "",
-        "value": "air",
-        "type": "element",
-        "subType": "",
-        "victoryPoints": 1,
-        "id": "air-10",
-        "isFaceUp": false
-    },
-    {
         "displayName": "Water",
         "displaySubtitle": "",
         "displayText": "",
@@ -418,25 +352,114 @@
         "isFaceUp": false
     },
     {
-        "displayName": "Water",
+        "displayName": "Disease",
         "displaySubtitle": "",
         "displayText": "",
-        "value": "water",
+        "value": "disease",
         "type": "element",
         "subType": "",
-        "victoryPoints": 1,
-        "id": "water-9",
+        "victoryPoints": 0,
+        "id": "disease-1",
         "isFaceUp": false
     },
     {
-        "displayName": "Water",
+        "displayName": "Disease",
         "displaySubtitle": "",
         "displayText": "",
-        "value": "water",
+        "value": "disease",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 0,
+        "id": "disease-2",
+        "isFaceUp": false
+    },
+    {
+        "displayName": "Disease",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "disease",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 0,
+        "id": "disease-3",
+        "isFaceUp": false
+    },
+    {
+        "displayName": "Disease",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "disease",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 0,
+        "id": "disease-4",
+        "isFaceUp": false
+    },
+    {
+        "displayName": "Swamp",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "swamp",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 0,
+        "id": "swamp-1",
+        "isFaceUp": false
+    },
+    {
+        "displayName": "Swamp",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "swamp",
         "type": "element",
         "subType": "",
         "victoryPoints": 1,
-        "id": "water-10",
+        "id": "swamp-2",
+        "isFaceUp": false
+    },
+    {
+        "displayName": "Wild",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "wild",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "wild-1",
+        "isFaceUp": false
+    },
+    {
+        "displayName": "Wild",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "wild",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 1,
+        "id": "wild-2",
+        "isFaceUp": false
+    },
+    {
+        "displayName": "Cursed Wild",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "cursedWild",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 0,
+        "id": "cursedWild-1",
+        "isFaceUp": false
+    },
+    {
+        "displayName": "Cursed Wild",
+        "displaySubtitle": "",
+        "displayText": "",
+        "value": "cursedWild",
+        "type": "element",
+        "subType": "",
+        "victoryPoints": 0,
+        "id": "cursedWild-2",
         "isFaceUp": false
     }
+
 ]

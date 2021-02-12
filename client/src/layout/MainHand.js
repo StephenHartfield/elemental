@@ -58,7 +58,7 @@ export default function MainHand({ cards, name, showOverlay }) {
     useEffect(() => {
         if(gameContext.currentTurn.name === gameContext.yourName) {
             setIsYourTurn(true);
-            if(gameContext.typeInPlay === 'sight') {
+            if(gameContext.typeInPlay === 'reveal') {
                 setIsInSightMode(true);
                 setTimer(setTimeout(() => {
                     if(isInSightMode) {
@@ -76,6 +76,10 @@ export default function MainHand({ cards, name, showOverlay }) {
                 setInterval(() => {
                     setSeconds(seconds - 1);
                 }, 1000);
+            } else {
+                clearInterval();
+                setIsInSightMode(false);
+                gameContext.endAction();
             }
         }
     }, [isInSightMode, seconds]);

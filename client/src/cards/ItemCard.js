@@ -70,7 +70,6 @@ const CardText = styled.p`
 export default function ItemCard({ card, faceUp, showOverlay, inOverlay, selectCard }) {
     const [localFaceUp, setLocalFaceUp] = useState(faceUp);
     const [localHover, setLocalHover] = useState(false);
-    const [slots, setSlots] = useState(null);
     const { icons } = assets;
     const { items } = assets.cards;
 

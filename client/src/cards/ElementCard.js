@@ -15,6 +15,7 @@ const Card = styled.div`
 
 export default function ElementCard({ card }) {
     const [localFaceUp, setLocalFaceUp] = useState(false);
+    const [isFading, setIsFading] = useState(false);
     const {elements} = assets.cards;
     const gameContext = useContext(GameContext);
     const logContext = useContext(LogContext);
@@ -22,6 +23,16 @@ export default function ElementCard({ card }) {
     useEffect(() => {
         setLocalFaceUp(card.isFaceUp);
     }, [card.isFaceUp]);
+
+    useEffect(() => {
+        if(gameContext.fadeCard && gameContext.fadeCard.id === card.id) {
+            setIsFading(true);
+            setTimeout(() => {
+                setLocalFaceUp(card.isFaceUp);
+                setIsFading(false);
+            }, 1000);
+        }
+    }, [gameContext.fadeCard]);
 
     const handleClick = () => {
         setLocalFaceUp(!localFaceUp);
@@ -35,6 +46,7 @@ export default function ElementCard({ card }) {
     return (
         <CardContainer 
             highlight={card.highlight} 
+            isFading={isFading}
             noborder 
             onClick={card.highlight && gameContext.numToPick > 0 ? handleClick : null} 
             faceUp={localFaceUp}

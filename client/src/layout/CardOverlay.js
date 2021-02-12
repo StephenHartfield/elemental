@@ -64,7 +64,7 @@ export default function CardOverlay({ card, showOverlay }) {
             value: `${gameContext.currentTurn.name} plays ${card.displayName}`
         })
         // const actionResult = playAction(card.value);
-        gameContext.playAction(card.value);
+        gameContext.playAction(card.value, card.subType);
         showOverlay(null);
     }
 

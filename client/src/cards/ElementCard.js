@@ -37,6 +37,7 @@ export default function ElementCard({ card }) {
     const handleClick = () => {
         setLocalFaceUp(!localFaceUp);
         logContext.addLog({
+            type: 'pickElement',
             key: gameContext.currentTurn.key,
             value: `${gameContext.currentTurn.name} draws ${card.displayName}`
         })

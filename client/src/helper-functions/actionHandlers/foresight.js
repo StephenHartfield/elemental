@@ -1,8 +1,8 @@
 import getSecondRow from "../getSecondRow";
+import removeUsedAction from "../removeUsedAction";
 
-
-export default function foresight(setup, turn) {
+export default function foresight(card, setup, turn) {
     const newSetup = getSecondRow(turn.name, setup, 'isFaceUp', true);
-    console.log(newSetup);
-    return newSetup;
+    const withActionCardRemoved = removeUsedAction(card, newSetup, turn.name);
+    return withActionCardRemoved;
 }

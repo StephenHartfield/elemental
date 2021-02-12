@@ -4,6 +4,7 @@ const LogContext = React.createContext();
 
 function LogProvider(props) {
     const [logs, setLogs] = useState({});
+    const [lastLog, setLastLog] = useState(null);
 
     const addLog = (log) => {
         if(logs[log.key]) {
@@ -15,13 +16,16 @@ function LogProvider(props) {
             newLogs[log.key] = [log.value];
             setLogs(newLogs);
         }
+        console.log(log.type);
+        setLastLog(log.type);
     }
 
     return (
         <LogContext.Provider
             value={{
                 logs,
-                addLog
+                addLog,
+                lastLog
             }}
         >
             {props.children}

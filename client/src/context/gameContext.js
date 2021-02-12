@@ -15,8 +15,8 @@ const GameContext = React.createContext();
 
 function GameProvider(props) {
     const [currentSetup, setCurrentSetup] = useState(null);
-    const [started, setStarted] = useState(false);
     const [currentTurn, setCurrentTurn] = useState(null);
+    const [started, setStarted] = useState(false);
     const [yourName, setYourName] = useState(null);
     const [focusBool, setFocusBool] = useState(false);
     const [setupUpdate, setUpdateSetup] = useState(false);
@@ -59,12 +59,13 @@ function GameProvider(props) {
         setNumToPick(1);
         const firstRowToHighlight = getFirstRow(name, currentSetup, 'highlight', true);
         setCurrentSetup(firstRowToHighlight);
+        setCurrentTurn(prev => ({...prev, drawPlay: true}));
         setTypeInPlay("draw");
     }
 
-    const playAction = (actionValue, actionType) => {
-        const newSetup = actionTypes(actionValue, currentSetup, currentTurn);
-        setTypeInPlay(actionType);
+    const playAction = (action) => {
+        const newSetup = actionTypes(action, currentSetup, currentTurn);
+        setTypeInPlay(action.subType);
         setCurrentSetup(newSetup);
         setFocusBool(!focusBool);
     }
@@ -110,6 +111,7 @@ function GameProvider(props) {
                 newSetup = removeElementPoolHighlights(newSetup);
                 if(!newSetupItemHighlight) {
                     logContext.addLog({
+                        type: 'discardedElement',
                         key: currentTurn.key,
                         value: `${card.displayName} is discarded`
                     })

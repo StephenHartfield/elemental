@@ -7,6 +7,7 @@ import CardOverlay from '../layout/CardOverlay';
 import ElementDeck from '../layout/ElementDeck';
 import ElementPool from '../layout/ElementPool';
 import Field from '../layout/Field';
+import Help from '../layout/Help';
 import LogDisplay from '../layout/LogDisplay';
 import MainHand from '../layout/MainHand';
 import PlayerData from '../layout/PlayerData';
@@ -78,6 +79,7 @@ export default function GameTable({cards}) {
                 <Hand />
             </StyledRow>
             <LogDisplay />
+            <Help />
             {players && playerOne ? <Field orientation='bottom' showOverlay={showOverlay} field={playerOne.field} /> : null}
             {playerOne && <MainHand cards={playerOne.hand} showOverlay={showOverlay} name={playerOne.name} />}
             {players && <PlayerData playerData={players} />}

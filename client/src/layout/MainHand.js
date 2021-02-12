@@ -86,6 +86,7 @@ export default function MainHand({ cards, name, showOverlay }) {
 
     const handleDraw = () => {
         logContext.addLog({
+            type: 'draw',
             key: gameContext.currentTurn.key,
             value: `${name} plays DRAW`
         })
@@ -114,7 +115,7 @@ export default function MainHand({ cards, name, showOverlay }) {
                 <StandardHeader nomargin>{name}</StandardHeader>
                 <StandardHeader nomargin>0 VP</StandardHeader>
                 {isYourTurn && <StandardHeader>Plays: {gameContext.currentTurn && gameContext.currentTurn.plays}</StandardHeader>}
-                {isYourTurn && <DrawButton onClick={handleDraw}>Draw</DrawButton>}
+                {isYourTurn && !gameContext.currentTurn.drawPlay ? <DrawButton onClick={handleDraw}>Draw</DrawButton> : null}
             </DataContainer>
         </FixedHand>
     )

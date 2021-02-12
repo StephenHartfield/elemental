@@ -60,11 +60,11 @@ export default function CardOverlay({ card, showOverlay }) {
     }
     const handlePlay = () => {
         logContext.addLog({
+            type: card.value,
             key: gameContext.currentTurn.key,
             value: `${gameContext.currentTurn.name} plays ${card.displayName}`
         })
-        // const actionResult = playAction(card.value);
-        gameContext.playAction(card.value, card.subType);
+        gameContext.playAction(card);
         showOverlay(null);
     }
 

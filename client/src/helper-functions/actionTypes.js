@@ -1,12 +1,12 @@
 import sight from "./actionHandlers/sight";
 import foresight from "./actionHandlers/foresight";
 
-export default function actionTypes(type, setup, turn) {
+export default function actionTypes(card, setup, turn) {
 
-    switch (type) {
+    switch (card.value) {
         case 'sight':
-            return sight(setup, turn);
+            return sight(card, setup, turn);
         case 'foresight':
-            return foresight(setup, turn);
+            return foresight(card, setup, turn);
     }
 }

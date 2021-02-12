@@ -36,7 +36,6 @@ export default function LogDisplay() {
 
     useEffect(() => {
         if (logContext.logs) {
-            console.log(logContext.logs);
             setLogs(logContext.logs);
         }
     }, [logContext.logs]);

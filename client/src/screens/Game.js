@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { LogProvider } from '../context/logContext';
 import GameTable from './GameTable';
 import StartGame from './StartGame';
 
@@ -26,9 +25,7 @@ export default function Game() {
         return <StartGame handleStartGame={handleStartGame} />
     } else {
         return (
-            <LogProvider>
-                <GameTable cards={cards} />
-            </LogProvider>
+            <GameTable cards={cards} />
         )
     }
 }

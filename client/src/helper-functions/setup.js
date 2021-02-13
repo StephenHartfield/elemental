@@ -17,8 +17,8 @@ export default function setup(cards) {
                 {item: null, elements: []},
                 {item: null, elements: []}
             ],
-            actionDeck: []
         })), 
+        actionDeck: [],
         elementPool: [...Array(setupRules.poolLayout.rows)].map(row => []), 
         elementDeck: [], 
         itemDeck: []
@@ -45,12 +45,12 @@ export default function setup(cards) {
                     if (player.hand.length < setupRules.initialHandSize) {
                         player.hand.push(card);
                         added=true;
-                    } else if (player.actionDeck.length < setupRules.initialActionDeckSize) {
-                        player.actionDeck.push(card);
-                        added=true;
-                    }
+                    } 
                 } 
             })
+            if (!added) {
+                setupData.actionDeck.push(card);
+            }
             return;
         }
         if (card.type === 'item') {

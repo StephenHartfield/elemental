@@ -17,7 +17,7 @@ const Card = styled.div`
 const Top = styled.div`
     display: flex;
     width: 100%;
-    margin-left: ${props => props.full ? props.inOverlay ? '18px' : '15px' : ''};
+    margin-left: ${props => props.full ? props.inOverlay ? '18px' : '11px' : ''};
     align-items: center;
     max-height: 40px;
     position: relative;
@@ -33,8 +33,8 @@ const Slots = styled.div`
 const Slot = styled.img`
     font-size: 8px;
     margin: 0px;
-    height: ${props => props.inOverlay ? '50px' : '20px'};
-    width: ${props => props.inOverlay ? '50px' : '20px'};
+    height: ${props => props.inOverlay ? '60px' : '26px'};
+    width: ${props => props.inOverlay ? '60px' : '26px'};
 `;
 
 const CardHeader = styled.h3`
@@ -70,14 +70,13 @@ const CardText = styled.p`
 export default function ItemCard({ card, faceUp, showOverlay, inOverlay, selectCard }) {
     const [localFaceUp, setLocalFaceUp] = useState(faceUp);
     const [localHover, setLocalHover] = useState(false);
-    const [slots, setSlots] = useState(null);
     const { icons } = assets;
     const { items } = assets.cards;
 
     const handleHover = () => {
         setLocalHover(setTimeout(() => {
             showOverlay(card);
-        }, 1000));
+        }, 1500));
     }
     const handlePickCard = () => {
         selectCard(card);

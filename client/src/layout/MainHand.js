@@ -51,31 +51,71 @@ export default function MainHand({ cards, name, showOverlay }) {
     const gameContext = useContext(GameContext);
     const logContext = useContext(LogContext);
     const [isYourTurn, setIsYourTurn] = useState(false);
+    const [timer, setTimer] = useState(null);
+    const [isInSightMode, setIsInSightMode] = useState(false);
+    const [seconds, setSeconds] = useState(10);
 
     useEffect(() => {
         if(gameContext.currentTurn.name === gameContext.yourName) {
             setIsYourTurn(true);
+            if(gameContext.typeInPlay === 'reveal') {
+                setIsInSightMode(true);
+                setTimer(setTimeout(() => {
+                    if(isInSightMode) {
+                        setIsInSightMode(false);
+                        gameContext.endAction();
+                    }
+                }, 10000));
+            }
         }
-    }, [gameContext.currentTurn, gameContext.yourName]);
+    }, [gameContext.currentTurn, gameContext.yourName, gameContext.typeInPlay]);
+
+    useEffect(() => {
+        if(isInSightMode) {
+            if(seconds > 0) {
+                setInterval(() => {
+                    setSeconds(seconds - 1);
+                }, 1000);
+            } else {
+                clearInterval();
+                setIsInSightMode(false);
+                gameContext.endAction();
+            }
+        }
+    }, [isInSightMode, seconds]);
 
     const handleDraw = () => {
         logContext.addLog({
+            type: 'draw',
             key: gameContext.currentTurn.key,
             value: `${name} plays DRAW`
         })
         gameContext.draw(name);
     }
+    const endTimer = () => {
+        clearTimeout();
+        setIsInSightMode(false);
+        gameContext.endAction();
+    }
         
     return (
         <FixedHand>
+            {isInSightMode ?
+                <div style={{width: '90%'}}>
+                    <p>View Elements</p>
+                    <p>{seconds}</p>
+                    <button onClick={endTimer}>End</button>
+                </div>
+            :
             <Hand>
                 {cards && cards.map((card, idx) => <ActionCard card={card} key={`hand${idx}`} faceUp={true} showOverlay={showOverlay} />)}
             </Hand>
+            }
             <DataContainer>
                 <StandardHeader nomargin>{name}</StandardHeader>
                 <StandardHeader nomargin>0 VP</StandardHeader>
-                {isYourTurn && <StandardHeader>Plays: 2</StandardHeader>}
-                {isYourTurn && <DrawButton onClick={handleDraw}>Draw</DrawButton>}
+                {isYourTurn && <StandardHeader>Plays: {gameContext.currentTurn && gameContext.currentTurn.plays}</StandardHeader>}
+                {isYourTurn && !gameContext.currentTurn.drawPlay ? <DrawButton onClick={handleDraw}>Draw</DrawButton> : null}
             </DataContainer>
         </FixedHand>
     )

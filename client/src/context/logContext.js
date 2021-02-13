@@ -4,16 +4,28 @@ const LogContext = React.createContext();
 
 function LogProvider(props) {
     const [logs, setLogs] = useState({});
+    const [lastLog, setLastLog] = useState(null);
 
     const addLog = (log) => {
-        setLogs(prev => ({...prev, [log.key]: log.value}));
+        if(logs[log.key]) {
+            const newLog = logs[log.key];
+            newLog.push(log.value);
+            setLogs(prev => ({...prev, [log.key]: newLog}));
+        } else {
+            const newLogs = logs;
+            newLogs[log.key] = [log.value];
+            setLogs(newLogs);
+        }
+        console.log(log.type);
+        setLastLog(log.type);
     }
 
     return (
         <LogContext.Provider
             value={{
                 logs,
-                addLog
+                addLog,
+                lastLog
             }}
         >
             {props.children}

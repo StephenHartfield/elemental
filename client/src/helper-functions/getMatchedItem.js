@@ -4,12 +4,12 @@ export default function getMatchedItem(card, setup, name) {
     const currentPlayerIdx = setup.players.findIndex(player => player.name === name);
     const items = currentPlayer.field.map(section => section.item);
     const matching = items.filter(item => {
-        const slotMatches = item.slots.map(slot => slot.name === card.value);
+        const slotMatches = item.slots.map(slot => slot.name === card.value && !slot.isActive);
         const anyTrue = slotMatches.find(bool => bool === true);
         return anyTrue;
     });
     console.log(matching);
-    if(matching) {
+    if(matching.length > 0) {
         const newData = setup;
         newData.players[currentPlayerIdx].field.forEach(itemSection => {
             matching.forEach(matchedItem => {

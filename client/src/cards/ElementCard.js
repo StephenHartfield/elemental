@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import assets from '../assets/AssetImport';
 import CardContainer from '../Constants/CardContainer';
@@ -13,15 +13,31 @@ const Card = styled.div`
     height: 100%;
 `;
 
-export default function ElementCard({ card, faceUp, number }) {
-    const [localFaceUp, setLocalFaceUp] = useState(faceUp);
-    const {elements} = assets.cards;
+export default function ElementCard({ card }) {
+    const [localFaceUp, setLocalFaceUp] = useState(false);
+    const [isFading, setIsFading] = useState(false);
+    const { elements } = assets.cards;
     const gameContext = useContext(GameContext);
     const logContext = useContext(LogContext);
+
+    useEffect(() => {
+        setLocalFaceUp(card.isFaceUp);
+    }, [card.isFaceUp]);
+
+    useEffect(() => {
+        if (gameContext.fadeCard && gameContext.fadeCard.id === card.id) {
+            setIsFading(true);
+            setTimeout(() => {
+                setLocalFaceUp(card.isFaceUp);
+                setIsFading(false);
+            }, 1000);
+        }
+    }, [gameContext.fadeCard]);
 
     const handleClick = () => {
         setLocalFaceUp(!localFaceUp);
         logContext.addLog({
+            type: 'pickElement',
             key: gameContext.currentTurn.key,
             value: `${gameContext.currentTurn.name} draws ${card.displayName}`
         })
@@ -29,17 +45,24 @@ export default function ElementCard({ card, faceUp, number }) {
     }
 
     return (
-        <CardContainer 
-            highlight={card.highlight} 
-            noborder 
-            onClick={card.highlight && gameContext.numToPick > 0 ? handleClick : null} 
+        <CardContainer
+            highlight={card.highlight}
+            isFading={isFading}
+            noborder
+            onClick={card.highlight && gameContext.numToPick > 0 ? handleClick : null}
             faceUp={localFaceUp}
         >
             <Card>
                 {localFaceUp ?
-                        <img src={elements[card.value]} style={{height: '100%', width: '100%', backgroundColor: "lightgray"}} />
-                :
-                    <img src={elements.back} style={{height: '100%', width: '100%'}} />
+                    <>
+                        {elements[card.value] ?
+                            <img src={elements[card.value]} style={{ height: '100%', width: '100%', backgroundColor: "lightgray" }} />
+                            :
+                            <p>{card.displayName}</p>
+                        }
+                    </>
+                    :
+                    <img src={elements.back} style={{ height: '100%', width: '100%' }} />
                 }
             </Card>
 

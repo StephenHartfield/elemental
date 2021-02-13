@@ -1,7 +1,7 @@
 const setupByPlayers = {
     2: {
         poolLayout: {
-            columns: 4,
+            columns: 5,
             rows: 3,
             total: 12
         },

@@ -29,10 +29,11 @@ export default function Field({ field, orientation, showOverlay }) {
 
     const selectCard = (card) => {
         logContext.addLog({
+            type: 'pickItem',
             key: gameContext.currentTurn.key,
-            value: `${gameContext.currentTurn.name} adds ${gameContext.cardToDraw} to ${card.displayName}`
+            value: `${gameContext.currentTurn.name} adds ${gameContext.cardsToDraw.displayName} to ${card.displayName}`
         })
-        gameContext.pickItem(field, card);
+        gameContext.pickItem(card);
     }
     return (
         <StyledField pos={orientation}>

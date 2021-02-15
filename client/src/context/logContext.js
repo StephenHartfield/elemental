@@ -16,7 +16,6 @@ function LogProvider(props) {
             newLogs[log.key] = [log.value];
             setLogs(newLogs);
         }
-        console.log(log.type);
         setLastLog(log.type);
     }
 

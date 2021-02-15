@@ -37,7 +37,7 @@ const Hand = styled.div`
     width: 90%;
     height: 95%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 `;
 const DrawButton = styled.div`
     background-color: green;
@@ -60,24 +60,20 @@ export default function MainHand({ cards, name, showOverlay }) {
             setIsYourTurn(true);
             if(gameContext.typeInPlay === 'reveal') {
                 setIsInSightMode(true);
-                setTimer(setTimeout(() => {
-                    if(isInSightMode) {
-                        setIsInSightMode(false);
-                        gameContext.endAction();
-                    }
-                }, 10000));
+                setSeconds(10);
             }
+        } else {
+            setIsYourTurn(false);
         }
-    }, [gameContext.currentTurn, gameContext.yourName, gameContext.typeInPlay]);
+    }, [gameContext.currentTurn && gameContext.currentTurn.name, gameContext.yourName, gameContext.typeInPlay]);
 
     useEffect(() => {
         if(isInSightMode) {
             if(seconds > 0) {
-                setInterval(() => {
+                setTimeout(() => {
                     setSeconds(seconds - 1);
                 }, 1000);
             } else {
-                clearInterval();
                 setIsInSightMode(false);
                 gameContext.endAction();
             }

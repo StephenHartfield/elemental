@@ -154,5 +154,77 @@
         "victoryPoints": 0,
         "image": "",
         "number": 12
+    },
+    {
+        "displayName": "Camp Fire",
+        "displaySubtitle": "",
+        "displayText": ".",
+        "value": "campFire",
+        "type": "item",
+        "subType": "",
+        "slots": [{"name": "fire", "isActive": false}, {"name": "fire", "isActive": false}, {"name": "fire", "isActive": false}],
+        "victoryPoints": 0,
+        "image": "",
+        "number": 13
+    },
+    {
+        "displayName": "Wind Flask",
+        "displaySubtitle": "",
+        "displayText": ".",
+        "value": "windFlask",
+        "type": "item",
+        "subType": "",
+        "slots": [{"name": "air", "isActive": false}, {"name": "air", "isActive": false}],
+        "victoryPoints": 0,
+        "image": "",
+        "number": 14
+    },
+    {
+        "displayName": "Earth Pot",
+        "displaySubtitle": "",
+        "displayText": ".",
+        "value": "earthPot",
+        "type": "item",
+        "subType": "",
+        "slots": [{"name": "earth", "isActive": false}, {"name": "earth", "isActive": false}],
+        "victoryPoints": 0,
+        "image": "",
+        "number": 15
+    },
+    {
+        "displayName": "Wind Wand",
+        "displaySubtitle": "",
+        "displayText": ".",
+        "value": "windWand",
+        "type": "item",
+        "subType": "",
+        "slots": [{"name": "air", "isActive": false}, {"name": "air", "isActive": false}, {"name": "air", "isActive": false}],
+        "victoryPoints": 0,
+        "image": "",
+        "number": 16
+    },
+    {
+        "displayName": "Water Pearl",
+        "displaySubtitle": "",
+        "displayText": ".",
+        "value": "waterPearl",
+        "type": "item",
+        "subType": "",
+        "slots": [{"name": "water", "isActive": false}, {"name": "water", "isActive": false}, {"name": "water", "isActive": false}],
+        "victoryPoints": 0,
+        "image": "",
+        "number": 17
+    },
+    {
+        "displayName": "Water Lens",
+        "displaySubtitle": "",
+        "displayText": ".",
+        "value": "waterLens",
+        "type": "item",
+        "subType": "",
+        "slots": [{"name": "water", "isActive": false}, {"name": "water", "isActive": false}],
+        "victoryPoints": 0,
+        "image": "",
+        "number": 18
     }
 ]

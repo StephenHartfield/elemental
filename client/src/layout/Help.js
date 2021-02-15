@@ -40,9 +40,6 @@ const List = styled.ul`
     padding: 0px;
     margin: 0px;
 `;
-const ListItem = styled.li`
-    list-style-type: none;
-`;
 
 export default function Help() {
     const [expanded, setExpanded] = useState(false);

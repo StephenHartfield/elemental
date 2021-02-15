@@ -17,6 +17,7 @@ export default function setup(cards) {
                 {item: null, elements: []},
                 {item: null, elements: []}
             ],
+            victoryPoints: 0
         })), 
         actionDeck: [],
         elementPool: [...Array(setupRules.poolLayout.rows)].map(row => []), 

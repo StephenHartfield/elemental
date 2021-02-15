@@ -29,12 +29,15 @@ const Slots = styled.div`
     top: ${props => props.full ? props.inOverlay ? '20px' : '10px' : 0};
     left: 0;
     min-height: 100px;
+    margin-top: ${props => props.inOverlay ? '8px' : '3px'};
 `;
 const Slot = styled.img`
     font-size: 8px;
     margin: 0px;
-    height: ${props => props.inOverlay ? '60px' : '26px'};
-    width: ${props => props.inOverlay ? '60px' : '26px'};
+    margin-bottom: 5px;
+    margin-left: ${props => props.inOverlay ? '10px' : '5px'};
+    height: ${props => props.inOverlay ? '40px' : '18px'};
+    width: ${props => props.inOverlay ? '40px' : '18px'};
 `;
 
 const CardHeader = styled.h3`

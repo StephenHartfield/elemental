@@ -11,6 +11,7 @@ import Help from '../layout/Help';
 import LogDisplay from '../layout/LogDisplay';
 import MainHand from '../layout/MainHand';
 import PlayerData from '../layout/PlayerData';
+import UtilityOverlay from '../layout/UtilityOverlay';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -39,6 +40,7 @@ export default function GameTable({cards}) {
     const [playerOne, setPlayerOne] = useState(null);
     const [playerTwo, setPlayerTwo] = useState(null);
     const [overlayCard, setOverlayCard] = useState(null);
+    const [utilityOverlay, setUtilityOverlay] = useState(null);
     const gameContext = useContext(GameContext);
 
     useEffect(() => {
@@ -68,10 +70,13 @@ export default function GameTable({cards}) {
     const showOverlay = (card) => {
         setOverlayCard(card);
     }
+    const showUtilityOverlay = (card) => {
+        setUtilityOverlay(card);
+    }
 
     return (
         <StyledContainer>
-            {playerTwo && <Field orientation='top' showOverlay={showOverlay} field={playerTwo.field} />}
+            {playerTwo && <Field orientation='top' showOverlay={showOverlay} field={playerTwo.field} hand={playerTwo.hand} />}
             <StyledRow>
                 <Hand />
                 {elementPool && <ElementPool cards={elementPool} numOfPlayers={players.length} />}
@@ -83,7 +88,8 @@ export default function GameTable({cards}) {
             {players && playerOne ? <Field orientation='bottom' showOverlay={showOverlay} field={playerOne.field} /> : null}
             {playerOne && <MainHand cards={playerOne.hand} showOverlay={showOverlay} name={playerOne.name} />}
             {players && <PlayerData playerData={players} />}
-            {overlayCard && <CardOverlay card={overlayCard} showOverlay={showOverlay} />}
+            {overlayCard && <CardOverlay card={overlayCard} showOverlay={showOverlay} showUtilityOverlay={showUtilityOverlay} />}
+            {utilityOverlay && <UtilityOverlay card={utilityOverlay} showOverlay={showUtilityOverlay} elementPool={elementPool} />}
         </StyledContainer>
     )
 }

@@ -51,8 +51,8 @@ const Slots = styled.div`
 const ItemSlot = styled.img`
     margin: 0px;
     font-size: 10px;
-    height: 24px;
-    width: 26px;
+    height: 20px;
+    width: 20px;
 `;
 
 export default function PlayerData({ playerData }) {

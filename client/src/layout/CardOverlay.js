@@ -44,7 +44,7 @@ const PlayButton = styled.div`
     cursor: pointer;
 `;
 
-export default function CardOverlay({ card, showOverlay }) {
+export default function CardOverlay({ card, showOverlay, showUtilityOverlay }) {
     const gameContext = useContext(GameContext);
     const logContext = useContext(LogContext);
     const [isYourTurn, setIsYourTurn] = useState(false);
@@ -59,12 +59,17 @@ export default function CardOverlay({ card, showOverlay }) {
         showOverlay(null);
     }
     const handlePlay = () => {
-        logContext.addLog({
-            type: card.value,
-            key: gameContext.currentTurn.key,
-            value: `${gameContext.currentTurn.name} plays ${card.displayName}`
-        })
-        gameContext.playAction(card);
+        if(card.utility) {
+            showOverlay(null);
+            showUtilityOverlay(card);
+        } else {
+            logContext.addLog({
+                type: card.value,
+                key: gameContext.currentTurn.key,
+                value: `${gameContext.currentTurn.name} plays ${card.displayName}`
+            });
+            gameContext.playAction(card);
+        }
         showOverlay(null);
     }
 

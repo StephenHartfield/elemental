@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import actionTypes from '../helper-functions/actionTypes';
 import addElementToField from '../helper-functions/addElementToField';
 import determineNextTurn from '../helper-functions/determineNextTurn';
@@ -9,6 +9,7 @@ import itemAbilities from '../helper-functions/itemAbilities';
 import poolFaceDown from '../helper-functions/poolFaceDown';
 import removeElementPoolHighlights from '../helper-functions/removeElementPoolHighlights';
 import removeItemHighlights from '../helper-functions/removeItemHighlights';
+import AIContext from './aIContext';
 import LogContext from './logContext';
 
 const GameContext = React.createContext();
@@ -25,10 +26,26 @@ function GameProvider(props) {
     const [cardsToDraw, setCardsToDraw] = useState(null);
     const [fadeCard, setFadeCard] = useState(null);
     const logContext = useContext(LogContext);
+    const aiContext = useContext(AIContext);
+
+    useEffect(() => {
+        if(currentTurn && currentTurn.name) {
+            const name = currentTurn.name === yourName ? "your" : `${currentTurn.name}'s`;
+            const split = currentTurn.key.split('-');
+            split[2] = '0';
+            const key = split.join('-');
+            logContext.addLog({
+                type: `It's ${name} turn`,
+                key: key,
+                value: `${currentTurn.name}'s Turn`
+            });
+        }
+    }, [currentTurn && currentTurn.name]);
 
     const setup = (initSetup) => {
         setCurrentSetup(initSetup);
         setYourName(initSetup.players[0].name);
+        aiContext.initPoolAndPlayerData(initSetup.elementPool, initSetup.players[1]);
         play(initSetup);
     }
 
@@ -45,9 +62,7 @@ function GameProvider(props) {
                 name: initSetup.players[playerToStart].name,
                 drawPlay: false,
                 plays: 2, 
-                round: 1, 
-                player: 1,
-                play: 1,
+                currentPlay: 1,
                 key: "1-1-1"};
             setCurrentTurn(turn);
         }
@@ -63,8 +78,8 @@ function GameProvider(props) {
         setTypeInPlay("draw");
     }
 
-    const playAction = (action) => {
-        const newSetup = actionTypes(action, currentSetup, currentTurn);
+    const playAction = (action, data) => {
+        const newSetup = actionTypes(action, currentSetup, currentTurn, data);
         setTypeInPlay(action.subType);
         setCurrentSetup(newSetup);
         setFocusBool(!focusBool);

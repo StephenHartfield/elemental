@@ -8,10 +8,9 @@ const mapHelpByLog = {
 }
 
 export default function determineHelpText(type) {
-    console.log(type);
     if(mapHelpByLog[type]) {
         return mapHelpByLog[type];
     } else {
-        return "It's your Next Play";
-    }
+        return type;
+    } 
 }

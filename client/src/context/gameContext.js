@@ -164,7 +164,7 @@ function GameProvider(props) {
                         value: `${currentTurn.name} switched the places of cards`
                     });
                 }
-                if(newSetup.arrangeFlow.lookAtElements.length === newSetup.arrangeFlow.num) {
+                if(newSetup.arrangeFlow.lookAtElements && newSetup.arrangeFlow.lookAtElements.length === newSetup.arrangeFlow.num) {
                     // completed looking at all cards, now put them back. 
                     // set typeInPlay to "returnElements"
                     // make elements in hand highlighted (clickable)
@@ -183,6 +183,7 @@ function GameProvider(props) {
             }
         } else if (typeInPlay === 'returnElements') {
             // search element pool for spots with just number property
+            // also note - perhaps we could use typeInPlay to disable things from being played within a play
         }
     }
 
@@ -197,6 +198,13 @@ function GameProvider(props) {
             }
             if(itemAbility && itemAbility.turn) {
                 setCurrentTurn(itemAbility.turn);
+            }
+            if(itemAbility && itemAbility.log) {
+                // need to increment key before this
+                logContext.addLog({
+                    key: currentTurn.key,
+                    value: itemAbility.log
+                })
             }
             // scenario of finishing item
 

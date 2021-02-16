@@ -4,5 +4,5 @@ export default function earthStaff(setup, turn) {
     const actionCardOffDeck = setup.actionDeck.pop();
     const newSetup = setup;
     newSetup.players[playerIdx].hand.push(actionCardOffDeck);
-    return {setup: newSetup};
+    return {setup: newSetup, log: ""};
 }

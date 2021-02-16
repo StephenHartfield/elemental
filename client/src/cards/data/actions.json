@@ -119,6 +119,7 @@
         "type": "action",
         "subType": "arrange",
         "victoryPoints": 0,
+        "utility": true,
         "number": 10
     },
     {
@@ -129,6 +130,7 @@
         "type": "action",
         "subType": "arrange",
         "victoryPoints": 0,
+        "utility": true,
         "number": 11
     },
     {

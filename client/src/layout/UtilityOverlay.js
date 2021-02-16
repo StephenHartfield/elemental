@@ -12,7 +12,7 @@ const Fixed = styled.div`
     align-items: center;
 `;
 
-export default function UtilityOverlay({ card, showOverlay, elementPool }) {
+export default function UtilityOverlay({ card, showOverlay, elementPool, players }) {
 
     const handleOffUtility = () => {
         showOverlay(null);
@@ -20,7 +20,7 @@ export default function UtilityOverlay({ card, showOverlay, elementPool }) {
 
     return (
         <Fixed onClick={handleOffUtility}>
-            {card && getUtilityLayout(card, elementPool)}
+            {card && getUtilityLayout(card, elementPool, players)}
         </Fixed>
     )
 }

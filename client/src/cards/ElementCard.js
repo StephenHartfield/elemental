@@ -16,6 +16,7 @@ const Card = styled.div`
 export default function ElementCard({ card }) {
     const [localFaceUp, setLocalFaceUp] = useState(false);
     const [isFading, setIsFading] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
     const { elements } = assets.cards;
     const gameContext = useContext(GameContext);
     const logContext = useContext(LogContext);
@@ -25,14 +26,19 @@ export default function ElementCard({ card }) {
     }, [card.isFaceUp]);
 
     useEffect(() => {
-        if (gameContext.fadeCard && gameContext.fadeCard.id === card.id) {
-            setIsFading(true);
-            setTimeout(() => {
-                setLocalFaceUp(card.isFaceUp);
-                setIsFading(false);
-            }, 1000);
+        if (gameContext.fadeCard.length > 0) {
+            gameContext.fadeCard.forEach(fCard => {
+                if(fCard.id === card.id) {
+                    setIsFading(true);
+                    setTimeout(() => {
+                        setLocalFaceUp(card.isFaceUp);
+                        setIsFading(false);
+                    }, 1000);
+                }
+            })
         }
     }, [gameContext.fadeCard]);
+
 
     const handleClick = () => {
         if(gameContext.typeInPlay === 'draw') {
@@ -48,10 +54,10 @@ export default function ElementCard({ card }) {
 
     return (
         <CardContainer
-            highlight={card.highlight}
+            highlight={card.highlight && !card.disabled}
             isFading={isFading}
             noborder
-            onClick={card.highlight ? handleClick : null}
+            onClick={card.highlight && !card.disabled ? handleClick : null}
             faceUp={localFaceUp}
         >
             <Card>

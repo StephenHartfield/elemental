@@ -89,7 +89,7 @@ export default function GameTable({cards}) {
             {playerOne && <MainHand cards={playerOne.hand} showOverlay={showOverlay} name={playerOne.name} />}
             {players && <PlayerData playerData={players} />}
             {overlayCard && <CardOverlay card={overlayCard} showOverlay={showOverlay} showUtilityOverlay={showUtilityOverlay} />}
-            {utilityOverlay && <UtilityOverlay card={utilityOverlay} showOverlay={showUtilityOverlay} elementPool={elementPool} />}
+            {utilityOverlay && <UtilityOverlay card={utilityOverlay} showOverlay={showUtilityOverlay} elementPool={elementPool} players={players} />}
         </StyledContainer>
     )
 }

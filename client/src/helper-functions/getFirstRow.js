@@ -9,7 +9,12 @@ export default function getFirstRow(name, setupData, property, value) {
         })
         return newData;
     } else if (orientation === "top") {
-        return {type: 'row', firstRow: setupData.elementPool[0]};
+        const newData = setupData;
+        newData.elementPool[0].forEach(card => {
+            card[property] = value;
+            return card;
+        })
+        return newData;
     }
 
 }

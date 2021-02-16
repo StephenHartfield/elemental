@@ -7,12 +7,11 @@ import getFirstRow from '../helper-functions/getFirstRow';
 import getMatchedItem from '../helper-functions/getMatchedItem';
 import getSecondRow from '../helper-functions/getSecondRow';
 import itemAbilities from '../helper-functions/itemAbilities';
-import poolFaceDown from '../helper-functions/poolFaceDown';
-import removeElementPoolHighlights from '../helper-functions/removeElementPoolHighlights';
 import removeItemHighlights from '../helper-functions/removeItemHighlights';
 import switchElements from '../helper-functions/switchElements';
 import AIContext from './aIContext';
 import LogContext from './logContext';
+import allPool from '../helper-functions/allPool';
 
 const GameContext = React.createContext();
 
@@ -26,12 +25,13 @@ function GameProvider(props) {
     const [numToPick, setNumToPick] = useState(0);
     const [typeInPlay, setTypeInPlay] = useState("");
     const [cardsToDraw, setCardsToDraw] = useState(null);
-    const [fadeCard, setFadeCard] = useState(null);
+    const [fadeCard, setFadeCard] = useState([]);
     const logContext = useContext(LogContext);
     const aiContext = useContext(AIContext);
 
     useEffect(() => {
         if(currentTurn && currentTurn.name) {
+            setFadeCard([]);
             const name = currentTurn.name === yourName ? "your" : `${currentTurn.name}'s`;
             const split = currentTurn.key.split('-');
             split[2] = '0';
@@ -90,12 +90,14 @@ function GameProvider(props) {
     const endAction = (card) => {
         let newSetup = currentSetup;
         if(typeInPlay === 'reveal') {
-            newSetup = poolFaceDown(newSetup);
+            newSetup = allPool(newSetup, 'isFaceUp', false);
         }
         if(typeInPlay === 'draw') {
             newSetup = removeItemHighlights(newSetup, currentTurn.name);
             handleDrawElement(cardsToDraw ? cardsToDraw : card);
         }
+        newSetup = allPool(newSetup, 'disabled', false);
+        setFocusBool(!focusBool);
         setCurrentSetup(newSetup);
         setUpdateSetup(!setupUpdate);
         const nextTurn = determineNextTurn(currentTurn, newSetup);
@@ -104,7 +106,7 @@ function GameProvider(props) {
     }
 
     const handleDrawElement = (card) => {
-        setFadeCard(card);
+        setFadeCard([card]);
         setTimeout(() => {
             const elementFromDeck = currentSetup.elementDeck.pop();
             const pos = getElementPosition(currentSetup, card.id);
@@ -125,7 +127,7 @@ function GameProvider(props) {
             }
             setNumToPick(numToPick-1);
             if(numToPick == 1) { // will be 0 after function finishes and state updates
-                newSetup = removeElementPoolHighlights(newSetup);
+                newSetup = allPool(newSetup, 'highlight', false);
                 if(!newSetupItemHighlight) {
                     logContext.addLog({
                         type: 'discardedElement',
@@ -140,24 +142,31 @@ function GameProvider(props) {
             setUpdateSetup(!setupUpdate);
         } else if(typeInPlay === 'arrange') {
             if(currentSetup.arrangeFlow.switchCards) {
-                let newSetup = removeElementPoolHighlights(currentSetup);
+                let newSetup = allPool(currentSetup, 'highlight', false);
                 newSetup.arrangeFlow.switchCards.push(card);
                 if(newSetup.arrangeFlow.switchCards.length === 2) {
+                    setFadeCard(newSetup.arrangeFlow.switchCards);
                     newSetup = switchElements(newSetup);
                     newSetup.arrangeFlow.switchCards = [];
+                    logContext.addLog({
+                        type: 'Cards Switched!',
+                        key: currentTurn.key,
+                        value: `${currentTurn.name} switched the places of cards`
+                    });
                 }
                 if(newSetup.arrangeFlow.steps.length > 0) {
                     const nextStep = newSetup.arrangeFlow.steps.shift();
                     if(nextStep === 'firstRow') {
                         newSetup = getFirstRow(currentTurn.name, newSetup, 'highlight', true);
-                    } else {
+                    } else if (nextStep === 'secondRow') {
                         newSetup = getSecondRow(currentTurn.name, newSetup, 'highlight', true);
+                    } else if (nextStep.includes('name')) {
+                        newSetup = getFirstRow(nextStep.split('-')[1], newSetup, 'highlight', true);
                     }
                 } else {
                     endAction();
-                    newSetup = removeElementPoolHighlights(newSetup);
+                    newSetup = allPool(newSetup, 'highlight', false);
                 }
-                console.log(newSetup);
                 setCurrentSetup(newSetup);
                 setFocusBool(!focusBool);
             }
@@ -199,7 +208,7 @@ function GameProvider(props) {
                 setupUpdate,
                 typeInPlay,
                 cardsToDraw,
-                fadeCard
+                fadeCard,
             }}
         >
             {props.children}

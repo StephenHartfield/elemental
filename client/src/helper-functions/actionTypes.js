@@ -3,6 +3,7 @@ import foresight from "./actionHandlers/foresight";
 import rearrange from "./actionHandlers/rearrange";
 import vision from "./actionHandlers/vision";
 import switcheroo from "./actionHandlers/switcheroo";
+import destinyChange from "./actionHandlers/destinyChange";
 
 export default function actionTypes(card, setup, turn, data) {
 
@@ -17,5 +18,7 @@ export default function actionTypes(card, setup, turn, data) {
             return switcheroo(card, setup, turn, data);
         case 'vision':
             return vision(card, setup, turn, data);
+        case 'destinyChange' :
+            return destinyChange(card, setup, turn);
     }
 }

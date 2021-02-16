@@ -12,6 +12,8 @@ import switchElements from '../helper-functions/switchElements';
 import AIContext from './aIContext';
 import LogContext from './logContext';
 import allPool from '../helper-functions/allPool';
+import determineNextArrageStep from '../helper-functions/determineNextArrangeStep';
+import removeUsedAction from '../helper-functions/removeUsedAction';
 
 const GameContext = React.createContext();
 
@@ -26,6 +28,7 @@ function GameProvider(props) {
     const [typeInPlay, setTypeInPlay] = useState("");
     const [cardsToDraw, setCardsToDraw] = useState(null);
     const [fadeCard, setFadeCard] = useState([]);
+    const [lookElements, setLookElements] = useState([]);
     const logContext = useContext(LogContext);
     const aiContext = useContext(AIContext);
 
@@ -82,8 +85,9 @@ function GameProvider(props) {
 
     const playAction = (action, data) => {
         const newSetup = actionTypes(action, currentSetup, currentTurn, data);
+        const withActionCardRemoved = removeUsedAction(action, newSetup, currentTurn.name);
         setTypeInPlay(action.subType);
-        setCurrentSetup(newSetup);
+        setCurrentSetup(withActionCardRemoved);
         setFocusBool(!focusBool);
     }
 
@@ -143,26 +147,33 @@ function GameProvider(props) {
         } else if(typeInPlay === 'arrange') {
             if(currentSetup.arrangeFlow.switchCards) {
                 let newSetup = allPool(currentSetup, 'highlight', false);
-                newSetup.arrangeFlow.switchCards.push(card);
+                if(newSetup.arrangeFlow.lookAtElements) {
+                    card.isFaceUp = true;
+                    newSetup.arrangeFlow.lookAtElements.push(card);
+                    newSetup.elementPool[getElementPosition(newSetup, card.id).row][getElementPosition(newSetup, card.id).col] = {number: newSetup.arrangeFlow.num - newSetup.arrangeFlow.steps.length};
+                    setLookElements(newSetup.arrangeFlow.lookAtElements);
+                } else {
+                    newSetup.arrangeFlow.switchCards.push(card);
+                }
                 if(newSetup.arrangeFlow.switchCards.length === 2) {
                     setFadeCard(newSetup.arrangeFlow.switchCards);
                     newSetup = switchElements(newSetup);
-                    newSetup.arrangeFlow.switchCards = [];
                     logContext.addLog({
                         type: 'Cards Switched!',
                         key: currentTurn.key,
                         value: `${currentTurn.name} switched the places of cards`
                     });
                 }
+                if(newSetup.arrangeFlow.lookAtElements.length === newSetup.arrangeFlow.num) {
+                    // completed looking at all cards, now put them back. 
+                    // set typeInPlay to "returnElements"
+                    // make elements in hand highlighted (clickable)
+                    // make help text clear "Return to spot #"
+                    console.log(newSetup.elementPool);
+                }
                 if(newSetup.arrangeFlow.steps.length > 0) {
                     const nextStep = newSetup.arrangeFlow.steps.shift();
-                    if(nextStep === 'firstRow') {
-                        newSetup = getFirstRow(currentTurn.name, newSetup, 'highlight', true);
-                    } else if (nextStep === 'secondRow') {
-                        newSetup = getSecondRow(currentTurn.name, newSetup, 'highlight', true);
-                    } else if (nextStep.includes('name')) {
-                        newSetup = getFirstRow(nextStep.split('-')[1], newSetup, 'highlight', true);
-                    }
+                    newSetup = determineNextArrageStep(currentTurn, newSetup, nextStep);
                 } else {
                     endAction();
                     newSetup = allPool(newSetup, 'highlight', false);
@@ -170,6 +181,8 @@ function GameProvider(props) {
                 setCurrentSetup(newSetup);
                 setFocusBool(!focusBool);
             }
+        } else if (typeInPlay === 'returnElements') {
+            // search element pool for spots with just number property
         }
     }
 
@@ -209,6 +222,7 @@ function GameProvider(props) {
                 typeInPlay,
                 cardsToDraw,
                 fadeCard,
+                lookElements
             }}
         >
             {props.children}

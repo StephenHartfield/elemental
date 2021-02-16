@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ActionCard from '../cards/ActionCard';
+import ElementCard from '../cards/ElementCard';
 import StandardHeader from '../Constants/StandardHeader';
 import GameContext from '../context/gameContext';
 import LogContext from '../context/logContext';
@@ -47,12 +48,20 @@ const DrawButton = styled.div`
     cursor: pointer;
 `;
 
+const LookCont = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+`;
+
 export default function MainHand({ cards, name, showOverlay }) {
     const gameContext = useContext(GameContext);
     const logContext = useContext(LogContext);
     const [isYourTurn, setIsYourTurn] = useState(false);
-    const [timer, setTimer] = useState(null);
     const [isInSightMode, setIsInSightMode] = useState(false);
+    const [inLookMode, setInLookMode] = useState(false);
+    const [elements, setElements] = useState(null);
     const [seconds, setSeconds] = useState(10);
 
     useEffect(() => {
@@ -62,10 +71,14 @@ export default function MainHand({ cards, name, showOverlay }) {
                 setIsInSightMode(true);
                 setSeconds(10);
             }
+            if(gameContext.lookElements.length > 0) {
+                setInLookMode(true);
+                setElements(gameContext.lookElements);
+            }
         } else {
             setIsYourTurn(false);
         }
-    }, [gameContext.currentTurn && gameContext.currentTurn.name, gameContext.yourName, gameContext.typeInPlay]);
+    }, [gameContext.currentTurn && gameContext.currentTurn.name, gameContext.yourName, gameContext.typeInPlay, gameContext.lookElements]);
 
     useEffect(() => {
         if(isInSightMode) {
@@ -102,6 +115,10 @@ export default function MainHand({ cards, name, showOverlay }) {
                     <p>{seconds}</p>
                     <button onClick={endTimer}>End</button>
                 </div>
+            : inLookMode ?
+                <LookCont>
+                    {elements.map(card => <ElementCard card={card}/>)}
+                </LookCont>
             :
             <Hand>
                 {cards && cards.map((card, idx) => <ActionCard card={card} key={`hand${idx}`} faceUp={true} showOverlay={showOverlay} />)}

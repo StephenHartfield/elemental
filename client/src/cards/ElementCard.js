@@ -35,7 +35,9 @@ export default function ElementCard({ card }) {
     }, [gameContext.fadeCard]);
 
     const handleClick = () => {
-        setLocalFaceUp(!localFaceUp);
+        if(gameContext.typeInPlay === 'draw') {
+            setLocalFaceUp(!localFaceUp);
+        }
         logContext.addLog({
             type: 'pickElement',
             key: gameContext.currentTurn.key,
@@ -49,7 +51,7 @@ export default function ElementCard({ card }) {
             highlight={card.highlight}
             isFading={isFading}
             noborder
-            onClick={card.highlight && gameContext.numToPick > 0 ? handleClick : null}
+            onClick={card.highlight ? handleClick : null}
             faceUp={localFaceUp}
         >
             <Card>

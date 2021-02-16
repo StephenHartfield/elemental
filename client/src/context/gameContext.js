@@ -5,10 +5,12 @@ import determineNextTurn from '../helper-functions/determineNextTurn';
 import getElementPosition from '../helper-functions/getElementPosition';
 import getFirstRow from '../helper-functions/getFirstRow';
 import getMatchedItem from '../helper-functions/getMatchedItem';
+import getSecondRow from '../helper-functions/getSecondRow';
 import itemAbilities from '../helper-functions/itemAbilities';
 import poolFaceDown from '../helper-functions/poolFaceDown';
 import removeElementPoolHighlights from '../helper-functions/removeElementPoolHighlights';
 import removeItemHighlights from '../helper-functions/removeItemHighlights';
+import switchElements from '../helper-functions/switchElements';
 import AIContext from './aIContext';
 import LogContext from './logContext';
 
@@ -131,12 +133,34 @@ function GameProvider(props) {
                         value: `${card.displayName} is discarded`
                     });
                     newSetup.elementDeck.unshift(card);
-                    console.log(newSetup.elementDeck);
                     endAction(card);
                 }
             }
             setCurrentSetup(newSetup);
             setUpdateSetup(!setupUpdate);
+        } else if(typeInPlay === 'arrange') {
+            if(currentSetup.arrangeFlow.switchCards) {
+                let newSetup = removeElementPoolHighlights(currentSetup);
+                newSetup.arrangeFlow.switchCards.push(card);
+                if(newSetup.arrangeFlow.switchCards.length === 2) {
+                    newSetup = switchElements(newSetup);
+                    newSetup.arrangeFlow.switchCards = [];
+                }
+                if(newSetup.arrangeFlow.steps.length > 0) {
+                    const nextStep = newSetup.arrangeFlow.steps.shift();
+                    if(nextStep === 'firstRow') {
+                        newSetup = getFirstRow(currentTurn.name, newSetup, 'highlight', true);
+                    } else {
+                        newSetup = getSecondRow(currentTurn.name, newSetup, 'highlight', true);
+                    }
+                } else {
+                    endAction();
+                    newSetup = removeElementPoolHighlights(newSetup);
+                }
+                console.log(newSetup);
+                setCurrentSetup(newSetup);
+                setFocusBool(!focusBool);
+            }
         }
     }
 

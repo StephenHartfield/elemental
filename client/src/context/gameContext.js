@@ -12,8 +12,10 @@ import switchElements from '../helper-functions/switchElements';
 import AIContext from './aIContext';
 import LogContext from './logContext';
 import allPool from '../helper-functions/allPool';
+import allHand from '../helper-functions/allHand';
 import determineNextArrageStep from '../helper-functions/determineNextArrangeStep';
 import removeUsedAction from '../helper-functions/removeUsedAction';
+import returnToHighlightedPos from '../helper-functions/returnToHighlightedPos';
 
 const GameContext = React.createContext();
 
@@ -101,6 +103,7 @@ function GameProvider(props) {
             handleDrawElement(cardsToDraw ? cardsToDraw : card);
         }
         newSetup = allPool(newSetup, 'disabled', false);
+        newSetup = allHand(newSetup, currentTurn, 'disabled', false);
         setFocusBool(!focusBool);
         setCurrentSetup(newSetup);
         setUpdateSetup(!setupUpdate);
@@ -151,7 +154,6 @@ function GameProvider(props) {
                     card.isFaceUp = true;
                     newSetup.arrangeFlow.lookAtElements.push(card);
                     newSetup.elementPool[getElementPosition(newSetup, card.id).row][getElementPosition(newSetup, card.id).col] = {number: newSetup.arrangeFlow.num - newSetup.arrangeFlow.steps.length};
-                    setLookElements(newSetup.arrangeFlow.lookAtElements);
                 } else {
                     newSetup.arrangeFlow.switchCards.push(card);
                 }
@@ -165,15 +167,15 @@ function GameProvider(props) {
                     });
                 }
                 if(newSetup.arrangeFlow.lookAtElements && newSetup.arrangeFlow.lookAtElements.length === newSetup.arrangeFlow.num) {
+                    setTypeInPlay('returnElements');
+                    newSetup.arrangeFlow.steps = newSetup.arrangeFlow.lookAtElements.map(step => 'return');
                     // completed looking at all cards, now put them back. 
-                    // set typeInPlay to "returnElements"
-                    // make elements in hand highlighted (clickable)
                     // make help text clear "Return to spot #"
-                    console.log(newSetup.elementPool);
                 }
                 if(newSetup.arrangeFlow.steps.length > 0) {
                     const nextStep = newSetup.arrangeFlow.steps.shift();
                     newSetup = determineNextArrageStep(currentTurn, newSetup, nextStep);
+                    setLookElements(newSetup.arrangeFlow.lookAtElements);
                 } else {
                     endAction();
                     newSetup = allPool(newSetup, 'highlight', false);
@@ -182,6 +184,19 @@ function GameProvider(props) {
                 setFocusBool(!focusBool);
             }
         } else if (typeInPlay === 'returnElements') {
+            let newSetup = returnToHighlightedPos(currentSetup, card);
+            if(newSetup.arrangeFlow.steps.length > 0) {
+                const nextStep = newSetup.arrangeFlow.steps.shift();
+                newSetup = determineNextArrageStep(currentTurn, newSetup, nextStep);
+                setLookElements(newSetup.arrangeFlow.lookAtElements);
+            } else {
+                endAction();
+                newSetup = allPool(newSetup, 'highlight', false);
+            }
+            setLookElements(newSetup.arrangeFlow.lookAtElements);
+            setCurrentSetup(newSetup);
+            setUpdateSetup(!setupUpdate);
+            setFocusBool(!focusBool);
             // search element pool for spots with just number property
             // also note - perhaps we could use typeInPlay to disable things from being played within a play
         }

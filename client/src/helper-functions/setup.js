@@ -22,7 +22,8 @@ export default function setup(cards) {
         actionDeck: [],
         elementPool: [...Array(setupRules.poolLayout.rows)].map(row => []), 
         elementDeck: [], 
-        itemDeck: []
+        itemDeck: [],
+        drawActionDisabled: false
     };
     cards.forEach(card => {
         let added = false;

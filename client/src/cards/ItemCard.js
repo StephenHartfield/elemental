@@ -35,7 +35,7 @@ const Slot = styled.img`
     font-size: 8px;
     margin: 0px;
     margin-bottom: 5px;
-    margin-left: ${props => props.inOverlay ? '10px' : '5px'};
+    margin-left: ${props => props.inOverlay ? '12px' : '5px'};
     height: ${props => props.inOverlay ? '40px' : '18px'};
     width: ${props => props.inOverlay ? '40px' : '18px'};
 `;

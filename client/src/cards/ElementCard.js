@@ -13,10 +13,9 @@ const Card = styled.div`
   height: 100%;
 `;
 
-export default function ElementCard({ card }) {
+export default function ElementCard({ card, inhand }) {
   const [localFaceUp, setLocalFaceUp] = useState(false);
   const [isFading, setIsFading] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
   const { elements } = assets.cards;
   const gameContext = useContext(GameContext);
   const logContext = useContext(LogContext);
@@ -48,7 +47,9 @@ export default function ElementCard({ card }) {
       key: gameContext.currentTurn.key,
       value: `${gameContext.currentTurn.name} draws ${card.displayName}`,
     });
-    gameContext.pickElement(card);
+    if(gameContext.typeInPlay != 'returnElements' || inhand === true) {
+        gameContext.pickElement(card);
+    }
   };
 
   return (

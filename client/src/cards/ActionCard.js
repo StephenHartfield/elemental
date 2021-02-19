@@ -62,9 +62,9 @@ export default function ActionCard({ card, faceUp, showOverlay, inOverlay }) {
 
     return (
         <CardContainer
-            onMouseEnter={!inOverlay ? handleHover : null}
+            onMouseEnter={!inOverlay && !card.disabled ? handleHover : null}
             onMouseLeave={!inOverlay ? removeHover : null}
-            onClick={!inOverlay ? handleClick : null}
+            onClick={!inOverlay && !card.disabled ? handleClick : null}
             faceUp={localFaceUp}
             isAction
             inOverlay={inOverlay}

@@ -13,7 +13,7 @@
         "displayName": "ForeKnowledge",
         "displaySubtitle": "Reveal",
         "displayText": "Reveal second row",
-        "value": "foreKnowledge",
+        "value": "foreknowledge",
         "type": "action",
         "subType": "reveal",
         "victoryPoints": 0,
@@ -33,7 +33,7 @@
         "displayName": "ForeKnowledge",
         "displaySubtitle": "Reveal",
         "displayText": "Reveal second row",
-        "value": "foreKnowledge",
+        "value": "foreknowledge",
         "type": "action",
         "subType": "reveal",
         "victoryPoints": 0,
@@ -134,12 +134,12 @@
         "number": 11
     },
     {
-        "displayName": "Draw",
-        "displaySubtitle": "Draw",
-        "displayText": "Draw from 2nd Row",
-        "value": "draw",
+        "displayName": "Restart",
+        "displaySubtitle": "Arrange",
+        "displayText": "Switch your 1st and 2nd row",
+        "value": "restart",
         "type": "action",
-        "subType": "draw",
+        "subType": "arrange",
         "victoryPoints": 0,
         "number": 12
     },{
@@ -170,40 +170,76 @@
         "victoryPoints": 0,
         "number": 15
     },{
-        "displayName": "Spirit Spies",
-        "displaySubtitle": "Arrange",
-        "displayText": "Look at 4 Elements and return them in any order",
-        "value": "spiritSpies",
+        "displayName": "Absorb",
+        "displaySubtitle": "Draw",
+        "displayText": "",
+        "value": "absorb",
         "type": "action",
-        "subType": "arrange",
+        "subType": "draw",
         "victoryPoints": 0,
         "number": 16
     },{
-        "displayName": "Spirit Spies",
-        "displaySubtitle": "Arrange",
-        "displayText": "Look at 4 Elements and return them in any order",
-        "value": "spiritSpies",
+        "displayName": "Draw Air",
+        "displaySubtitle": "Draw",
+        "displayText": "",
+        "value": "drawAir",
         "type": "action",
-        "subType": "arrange",
+        "subType": "draw",
         "victoryPoints": 0,
         "number": 17
     },{
-        "displayName": "Spirit Spies",
-        "displaySubtitle": "Arrange",
-        "displayText": "Look at 4 Elements and return them in any order",
-        "value": "spiritSpies",
+        "displayName": "Draw Earth",
+        "displaySubtitle": "Draw",
+        "displayText": "",
+        "value": "drawEarth",
         "type": "action",
-        "subType": "arrange",
+        "subType": "draw",
         "victoryPoints": 0,
         "number": 18
     },{
-        "displayName": "Spirit Spies",
-        "displaySubtitle": "Arrange",
-        "displayText": "Look at 4 Elements and return them in any order",
-        "value": "spiritSpies",
+        "displayName": "Draw Fire",
+        "displaySubtitle": "Draw",
+        "displayText": "",
+        "value": "drawFire",
         "type": "action",
-        "subType": "arrange",
+        "subType": "draw",
         "victoryPoints": 0,
         "number": 19
+    }, {
+        "displayName": "Draw Water",
+        "displaySubtitle": "Draw",
+        "displayText": "",
+        "value": "drawWater",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 20
+    }, {
+        "displayName": "Madman or Genius",
+        "displaySubtitle": "Draw",
+        "displayText": "",
+        "value": "madman",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 21
+    }, {
+        "displayName": "Sacrificial Draw",
+        "displaySubtitle": "Draw",
+        "displayText": "",
+        "value": "sacrificialDraw",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 22
+    }, {
+        "displayName": "Shot In the Dark",
+        "displaySubtitle": "Draw",
+        "displayText": "",
+        "value": "shotInTheDark",
+        "type": "action",
+        "subType": "draw",
+        "victoryPoints": 0,
+        "number": 23
     }
 ]

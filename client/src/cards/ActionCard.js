@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CardContainer from '../Constants/CardContainer';
-import assets from '../assets/AssetImport';
+import {actions} from '../assets/AssetImport';
 
 const Card = styled.div`
     padding: ${props => props.full ? '0px' : '8px'};
@@ -46,7 +46,6 @@ const CardText = styled.p`
 export default function ActionCard({ card, faceUp, showOverlay, inOverlay }) {
     const [localFaceUp, setLocalFaceUp] = useState(faceUp);
     const [localHover, setLocalHover] = useState(false);
-    const { actions } = assets.cards;
 
     const handleHover = () => {
         setLocalHover(setTimeout(() => {

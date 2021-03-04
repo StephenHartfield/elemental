@@ -1,7 +1,8 @@
+import updateAIPool from "../aiHelpers/updateAIPool";
 import getOneColumn from "../getOneColumn";
-import removeUsedAction from "../removeUsedAction";
 
-export default function vision(card, setup, turn, data) {
+export default function vision(card, setup, turn, data, aiPool) {
     const newSetup = getOneColumn(turn.name, setup, "isFaceUp", true, data);
-    return newSetup;
+    aiPool = updateAIPool(newSetup.elementPool, aiPool);
+    return {aiPool, newSetup};
 }

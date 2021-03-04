@@ -16,6 +16,7 @@ import allHand from '../helper-functions/allHand';
 import determineNextArrageStep from '../helper-functions/determineNextArrangeStep';
 import removeUsedAction from '../helper-functions/removeUsedAction';
 import returnToHighlightedPos from '../helper-functions/returnToHighlightedPos';
+import lookAtElems from '../helper-functions/lookAtElems';
 
 const GameContext = React.createContext();
 
@@ -46,6 +47,11 @@ function GameProvider(props) {
                 key: key,
                 value: `${currentTurn.name}'s Turn`
             });
+            if(currentTurn.name != yourName) {
+                const playerIdx = currentSetup.players.findIndex(player => player.name === currentTurn.name);
+                console.log(currentSetup.players[playerIdx]);
+                const AIMove = aiContext.determinePlay(currentTurn);
+            }
         }
     }, [currentTurn && currentTurn.name]);
 
@@ -59,7 +65,7 @@ function GameProvider(props) {
     const determineFirstTurn = (initSetup) => {
         const numOfPlayers = initSetup.players.length; 
         // return Math.floor(Math.random() * numOfPlayers);
-        return 0;
+        return 1;
     }
 
     const play = (initSetup) => {
@@ -76,7 +82,6 @@ function GameProvider(props) {
     }
 
     const draw = (name) => {
-        // give overlay of "pick from first row"
         setFocusBool(!focusBool); // focus on elementPool
         setNumToPick(1);
         const firstRowToHighlight = getFirstRow(name, currentSetup, 'highlight', true);
@@ -86,7 +91,14 @@ function GameProvider(props) {
     }
 
     const playAction = (action, data) => {
-        const newSetup = actionTypes(action, currentSetup, currentTurn, data);
+        const actionSetup = actionTypes(action, currentSetup, currentTurn, data, aiContext.AIElementPool);
+        let newSetup;
+        if(actionSetup.newSetup) {
+            newSetup = actionSetup.newSetup;
+            aiContext.updateAIPool(actionSetup.aiPool);
+        } else {
+            newSetup = actionSetup;
+        }
         const withActionCardRemoved = removeUsedAction(action, newSetup, currentTurn.name);
         setTypeInPlay(action.subType);
         setCurrentSetup(withActionCardRemoved);
@@ -119,6 +131,9 @@ function GameProvider(props) {
             const pos = getElementPosition(currentSetup, card.id);
             const newSetup = currentSetup;
             newSetup.elementPool[pos.row][pos.col] = elementFromDeck;
+            const aiPool = aiContext.AIElementPool;
+            aiPool[pos.row][pos.col] = {};
+            aiContext.updateAIPool(aiPool);
             setCurrentSetup(newSetup);
             setFocusBool(!focusBool);
         }, 1000);
@@ -151,15 +166,17 @@ function GameProvider(props) {
             if(currentSetup.arrangeFlow.switchCards) {
                 let newSetup = allPool(currentSetup, 'highlight', false);
                 if(newSetup.arrangeFlow.lookAtElements) {
-                    card.isFaceUp = true;
-                    newSetup.arrangeFlow.lookAtElements.push(card);
-                    newSetup.elementPool[getElementPosition(newSetup, card.id).row][getElementPosition(newSetup, card.id).col] = {number: newSetup.arrangeFlow.num - newSetup.arrangeFlow.steps.length};
+                    const both = lookAtElems(card, newSetup, aiContext.AIElementPool);
+                    newSetup = both.newSetup;
+                    aiContext.updateAIPool(both.aiPool);
                 } else {
                     newSetup.arrangeFlow.switchCards.push(card);
                 }
                 if(newSetup.arrangeFlow.switchCards.length === 2) {
                     setFadeCard(newSetup.arrangeFlow.switchCards);
-                    newSetup = switchElements(newSetup);
+                    const bothPools = switchElements(newSetup, aiContext.AIElementPool);
+                    newSetup = bothPools.newSetup;
+                    aiContext.updateAIPool(bothPools.aiPool);
                     logContext.addLog({
                         type: 'Cards Switched!',
                         key: currentTurn.key,
@@ -169,8 +186,6 @@ function GameProvider(props) {
                 if(newSetup.arrangeFlow.lookAtElements && newSetup.arrangeFlow.lookAtElements.length === newSetup.arrangeFlow.num) {
                     setTypeInPlay('returnElements');
                     newSetup.arrangeFlow.steps = newSetup.arrangeFlow.lookAtElements.map(step => 'return');
-                    // completed looking at all cards, now put them back. 
-                    // make help text clear "Return to spot #"
                 }
                 if(newSetup.arrangeFlow.steps.length > 0) {
                     const nextStep = newSetup.arrangeFlow.steps.shift();
@@ -197,8 +212,6 @@ function GameProvider(props) {
             setCurrentSetup(newSetup);
             setUpdateSetup(!setupUpdate);
             setFocusBool(!focusBool);
-            // search element pool for spots with just number property
-            // also note - perhaps we could use typeInPlay to disable things from being played within a play
         }
     }
 

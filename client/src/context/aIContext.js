@@ -24,13 +24,48 @@ function AIProvider(props) {
         setAIElementPool(newPool);
     }
 
+    const updateAIPool = (pool) => {
+        console.log(pool);
+        setAIElementPool(pool);
+    }
+
+    const determinePlay = (turn) => {
+        let firstRowKnown = [];
+        const firstRow = AIElementPool[0];
+        const field = AIPlayerData.field;
+        const hand = AIPlayerData.hand;
+        console.log(hand);
+        firstRow.map((col, cIdx) => {
+            if(col.displayName) {
+                firstRowKnown[cIdx] = true;
+                field.forEach(itemSection => {
+                    itemSection.item.slots.forEach(slot => {
+                        if(!slot.isActive && slot.name === col.value) {
+                            if(!turn.drawPlay) {
+                                return `drawPlay_draw_pos-0-${cIdx}_to_${itemSection.item}`;
+                            }
+                        }
+                    })
+                })
+            } else {
+                firstRowKnown[cIdx] = false;
+            }
+        });
+        const firstRowAboveAverage = (firstRowKnown.length/2) < firstRowKnown.filter(col => col != false).length;
+        if(firstRowAboveAverage) {
+            // play a reveal action for first row
+        }
+    }
+
     return (
         <AIContext.Provider
             value={{
                 initPoolAndPlayerData,
                 AIElementPool,
                 addToMemory,
-                removeFromMemory
+                removeFromMemory,
+                updateAIPool,
+                determinePlay
             }}
         >
             {props.children}

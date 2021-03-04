@@ -79,6 +79,8 @@ export default function MainHand({ cards, name, showOverlay }) {
                 setElements(null);
             }
         } else {
+            setInLookMode(false);
+            setIsInSightMode(false);
             setIsYourTurn(false);
         }
     }, [gameContext.currentTurn && gameContext.currentTurn.name, gameContext.yourName, gameContext.typeInPlay, gameContext.lookElements]);
@@ -120,7 +122,7 @@ export default function MainHand({ cards, name, showOverlay }) {
                 </div>
             : inLookMode ?
                 <LookCont>
-                    {elements && elements.map(card => <ElementCard card={card} inhand={true} />)}
+                    {elements && elements.map(card => <ElementCard key={card.id} card={card} inhand={true} />)}
                 </LookCont>
             :
             <Hand>
